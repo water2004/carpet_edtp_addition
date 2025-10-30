@@ -23,9 +23,23 @@ public class CarpetEdtpAdditionSettings {
         "Armor stands won't be pushed by attacks, explosions or flowing fluids"
     );
     
+    public static final EdtpCarpetRule safeTeleport = new EdtpCarpetRule(
+        "safeTeleport",
+        false,
+        "Prevents teleportation to unsafe locations (void, suffocation)"
+    );
+    
+    public static final EdtpCarpetRule tickCommandForAll = new EdtpCarpetRule(
+        "tickCommandForAll",
+        false,
+        "Allows non-op players to use the /tick command"
+    );
+    
     public static void register() {
         CarpetServer.settingsManager.addCarpetRule(softObsidian);
         CarpetServer.settingsManager.addCarpetRule(unPushableArmorStands);
+        CarpetServer.settingsManager.addCarpetRule(safeTeleport);
+        CarpetServer.settingsManager.addCarpetRule(tickCommandForAll);
     }
     
     public static class EdtpCarpetRule implements CarpetRule<Boolean> {

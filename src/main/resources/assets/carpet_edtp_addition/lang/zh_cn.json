@@ -3,5 +3,11 @@
   "carpet.rule.softObsidian.name": "易碎黑曜石",
   "carpet.rule.softObsidian.desc": "设置黑曜石的硬度与末地石相同",
   "carpet.rule.unPushableArmorStands.name": "不可击退盔甲架",
-  "carpet.rule.unPushableArmorStands.desc": "盔甲架不会被攻击、爆炸或流体推动"
+  "carpet.rule.unPushableArmorStands.desc": "盔甲架不会被攻击、爆炸或流体推动",
+  "carpet.rule.safeTeleport.name": "安全传送",
+  "carpet.rule.safeTeleport.desc": "阻止传送到不安全的位置(虚空、窒息)",
+  "carpet.rule.safeTeleport.void": "无法传送到虚空!",
+  "carpet.rule.safeTeleport.suffocation": "目标位置会导致窒息,传送被阻止!",
+  "carpet.rule.tickCommandForAll.name": "所有人可用Tick指令",
+  "carpet.rule.tickCommandForAll.desc": "允许非OP玩家使用/tick指令"
 }

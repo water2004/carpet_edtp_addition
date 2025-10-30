@@ -3,5 +3,11 @@
   "carpet.rule.softObsidian.name": "Soft Obsidian",
   "carpet.rule.softObsidian.desc": "Set the hardness of obsidian to be the same as end stone",
   "carpet.rule.unPushableArmorStands.name": "Unpushable Armor Stands",
-  "carpet.rule.unPushableArmorStands.desc": "Armor stands won't be pushed by attacks, explosions or flowing fluids"
+  "carpet.rule.unPushableArmorStands.desc": "Armor stands won't be pushed by attacks, explosions or flowing fluids",
+  "carpet.rule.safeTeleport.name": "Safe Teleport",
+  "carpet.rule.safeTeleport.desc": "Prevents teleportation to unsafe locations (void, suffocation)",
+  "carpet.rule.safeTeleport.void": "Cannot teleport to the void!",
+  "carpet.rule.safeTeleport.suffocation": "Target location would cause suffocation, teleport blocked!",
+  "carpet.rule.tickCommandForAll.name": "Tick Command For All",
+  "carpet.rule.tickCommandForAll.desc": "Allows non-op players to use the /tick command"
 }
