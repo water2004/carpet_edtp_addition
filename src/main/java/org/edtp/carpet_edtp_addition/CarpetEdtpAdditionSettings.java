@@ -35,11 +35,18 @@ public class CarpetEdtpAdditionSettings {
         "Allows non-op players to use the /tick command"
     );
     
+    public static final EdtpCarpetRule noFurnaceAsh = new EdtpCarpetRule(
+        "noFurnaceAsh",
+        false,
+        "Items without recipes pass through furnaces instantly, preventing ash waste"
+    );
+    
     public static void register() {
         CarpetServer.settingsManager.addCarpetRule(softObsidian);
         CarpetServer.settingsManager.addCarpetRule(unPushableArmorStands);
         CarpetServer.settingsManager.addCarpetRule(safeTeleport);
         CarpetServer.settingsManager.addCarpetRule(tickCommandForAll);
+        CarpetServer.settingsManager.addCarpetRule(noFurnaceAsh);
     }
     
     public static class EdtpCarpetRule implements CarpetRule<Boolean> {

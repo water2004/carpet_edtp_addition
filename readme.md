@@ -7,3 +7,5 @@
 `safeTeleport`: 阻止传送到不安全的位置(虚空、窒息)
 
 `tickCommandForAll`: 允许非OP玩家使用/tick指令
+
+`noFurnaceAsh`: 没有配方的物品瞬间通过熔炉,避免手动清理熔炉

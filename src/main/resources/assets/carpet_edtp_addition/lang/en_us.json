@@ -9,5 +9,7 @@
   "carpet.rule.safeTeleport.void": "Cannot teleport to the void!",
   "carpet.rule.safeTeleport.suffocation": "Target location would cause suffocation, teleport blocked!",
   "carpet.rule.tickCommandForAll.name": "Tick Command For All",
-  "carpet.rule.tickCommandForAll.desc": "Allows non-op players to use the /tick command"
+  "carpet.rule.tickCommandForAll.desc": "Allows non-op players to use the /tick command",
+  "carpet.rule.noFurnaceAsh.name": "No Furnace Ash",
+  "carpet.rule.noFurnaceAsh.desc": "Items without recipes pass through furnaces instantly, preventing ash wastage"
 }

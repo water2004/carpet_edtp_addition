@@ -7,7 +7,8 @@
     "AbstractBlockStateMixin",
     "LivingEntityMixin",
     "TeleportCommandMixin",
-    "TickCommandMixin"
+    "TickCommandMixin",
+    "AbstractFurnaceBlockEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
