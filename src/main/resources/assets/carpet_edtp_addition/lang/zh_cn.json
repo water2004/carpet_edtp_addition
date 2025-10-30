@@ -1,5 +1,7 @@
 {
   "carpet.category.EDTP": "EDTP",
   "carpet.rule.softObsidian.name": "易碎黑曜石",
-  "carpet.rule.softObsidian.desc": "设置黑曜石的硬度与末地石相同"
+  "carpet.rule.softObsidian.desc": "设置黑曜石的硬度与末地石相同",
+  "carpet.rule.unPushableArmorStands.name": "不可击退盔甲架",
+  "carpet.rule.unPushableArmorStands.desc": "盔甲架不会被攻击、爆炸或流体推动"
 }

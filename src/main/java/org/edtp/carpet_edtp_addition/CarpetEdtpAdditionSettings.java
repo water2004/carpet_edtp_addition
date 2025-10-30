@@ -17,8 +17,15 @@ public class CarpetEdtpAdditionSettings {
         "Set the hardness of obsidian to be the same as end stone"
     );
     
+    public static final EdtpCarpetRule unPushableArmorStands = new EdtpCarpetRule(
+        "unPushableArmorStands",
+        false,
+        "Armor stands won't be pushed by attacks, explosions or flowing fluids"
+    );
+    
     public static void register() {
         CarpetServer.settingsManager.addCarpetRule(softObsidian);
+        CarpetServer.settingsManager.addCarpetRule(unPushableArmorStands);
     }
     
     public static class EdtpCarpetRule implements CarpetRule<Boolean> {

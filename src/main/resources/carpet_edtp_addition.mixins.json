@@ -4,7 +4,8 @@
   "package": "org.edtp.carpet_edtp_addition.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "AbstractBlockStateMixin"
+    "AbstractBlockStateMixin",
+    "LivingEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
