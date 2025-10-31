@@ -41,12 +41,26 @@ public class CarpetEdtpAdditionSettings {
         "Items without recipes pass through furnaces instantly, preventing ash waste"
     );
     
+    public static final EdtpCarpetRule noPlayerPortals = new EdtpCarpetRule(
+        "noPlayerPortals",
+        false,
+        "Prevents players from using portals"
+    );
+    
+    public static final EdtpCarpetRule disableObservers = new EdtpCarpetRule(
+        "disableObservers",
+        false,
+        "Observers don't detect block updates"
+    );
+    
     public static void register() {
         CarpetServer.settingsManager.addCarpetRule(softObsidian);
         CarpetServer.settingsManager.addCarpetRule(unPushableArmorStands);
         CarpetServer.settingsManager.addCarpetRule(safeTeleport);
         CarpetServer.settingsManager.addCarpetRule(tickCommandForAll);
         CarpetServer.settingsManager.addCarpetRule(noFurnaceAsh);
+        CarpetServer.settingsManager.addCarpetRule(noPlayerPortals);
+        CarpetServer.settingsManager.addCarpetRule(disableObservers);
     }
     
     public static class EdtpCarpetRule implements CarpetRule<Boolean> {

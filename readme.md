@@ -9,3 +9,7 @@
 `tickCommandForAll`: 允许非OP玩家使用/tick指令
 
 `noFurnaceAsh`: 没有配方的物品瞬间通过熔炉,避免手动清理熔炉
+
+`noPlayerPortals`: 玩家无法使用末地传送门和下界传送门
+
+`disableObservers`: 侦测器不检测方块更新

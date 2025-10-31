@@ -11,5 +11,9 @@
   "carpet.rule.tickCommandForAll.name": "所有人可用Tick指令",
   "carpet.rule.tickCommandForAll.desc": "允许非OP玩家使用/tick指令",
   "carpet.rule.noFurnaceAsh.name": "无需掏炉灰",
-  "carpet.rule.noFurnaceAsh.desc": "没有配方的物品瞬间通过熔炉,避免手动清理熔炉"
+  "carpet.rule.noFurnaceAsh.desc": "没有配方的物品瞬间通过熔炉,避免浪费燃料",
+  "carpet.rule.noPlayerPortals.name": "禁止传送门",
+  "carpet.rule.noPlayerPortals.desc": "阻止玩家使用传送门传送",
+  "carpet.rule.disableObservers.name": "禁用侦测器",
+  "carpet.rule.disableObservers.desc": "侦测器不检测方块更新"
 }

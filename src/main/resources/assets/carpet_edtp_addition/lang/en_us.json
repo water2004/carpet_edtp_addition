@@ -11,5 +11,9 @@
   "carpet.rule.tickCommandForAll.name": "Tick Command For All",
   "carpet.rule.tickCommandForAll.desc": "Allows non-op players to use the /tick command",
   "carpet.rule.noFurnaceAsh.name": "No Furnace Ash",
-  "carpet.rule.noFurnaceAsh.desc": "Items without recipes pass through furnaces instantly, preventing ash wastage"
+  "carpet.rule.noFurnaceAsh.desc": "Items without recipes pass through furnaces instantly, preventing ash waste",
+  "carpet.rule.noPlayerPortals.name": "No Player Portals",
+  "carpet.rule.noPlayerPortals.desc": "Prevents players from using portals",
+  "carpet.rule.disableObservers.name": "Disable Observers",
+  "carpet.rule.disableObservers.desc": "Observers don't detect block updates"
 }
