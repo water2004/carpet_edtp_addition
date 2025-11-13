@@ -17,3 +17,5 @@
 `strongerBundle`: 允许最多八个潜影盒放入收纳袋, 同时禁止将收纳袋放入潜影盒
 
 `toughArmorStands`: 攻击不会使得盔甲架掉落
+
+`toughSlimeBlocks`: 设置粘液块和蜂蜜块的硬度与末地石相同

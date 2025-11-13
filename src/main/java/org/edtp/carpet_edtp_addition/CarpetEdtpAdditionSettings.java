@@ -65,6 +65,12 @@ public class CarpetEdtpAdditionSettings {
         "Armor stands won't take damage from attacks"
     );
     
+    public static final EdtpCarpetRule toughSlimeBlocks = new EdtpCarpetRule(
+        "toughSlimeBlocks",
+        false,
+        "Set the hardness of slime blocks and honey blocks to be the same as end stone"
+    );
+    
     public static void register() {
         CarpetServer.settingsManager.addCarpetRule(softObsidian);
         CarpetServer.settingsManager.addCarpetRule(unPushableArmorStands);
@@ -75,6 +81,7 @@ public class CarpetEdtpAdditionSettings {
         CarpetServer.settingsManager.addCarpetRule(disableObservers);
         CarpetServer.settingsManager.addCarpetRule(strongerBundle);
         CarpetServer.settingsManager.addCarpetRule(toughArmorStands);
+        CarpetServer.settingsManager.addCarpetRule(toughSlimeBlocks);
     }
     
     public static class EdtpCarpetRule implements CarpetRule<Boolean> {

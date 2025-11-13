@@ -20,6 +20,8 @@
   "carpet.rule.strongerBundle.desc": "允许将潜影盒放入收纳袋中(最多8个),防止收纳袋放入潜影盒",
   "carpet.rule.toughArmorStands.name": "坚韧盔甲架",
   "carpet.rule.toughArmorStands.desc": "盔甲架被攻击时不会受到伤害",
+  "carpet.rule.toughSlimeBlocks.name": "坚韧粘液块",
+  "carpet.rule.toughSlimeBlocks.desc": "设置粘液块和蜂蜜块的硬度与末地石相同",
   "item.bundle.insert.success": "已放入 %s × %s",
   "item.bundle.insert.fail": "无法放入 %s (收纳袋已满)"
 }

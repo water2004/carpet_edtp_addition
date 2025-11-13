@@ -23,6 +23,11 @@ public class BlockHardnessModifiers {
             return Optional.of(Blocks.END_STONE.getHardness());
         }
         
+        // 坚韧粘液块
+        if (CarpetEdtpAdditionSettings.toughSlimeBlocks.value() && (block == Blocks.SLIME_BLOCK || block == Blocks.HONEY_BLOCK)) {
+            return Optional.of(Blocks.END_STONE.getHardness());
+        }
+        
         return Optional.empty();
     }
 }
