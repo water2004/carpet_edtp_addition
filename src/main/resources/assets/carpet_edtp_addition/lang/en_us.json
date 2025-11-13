@@ -15,5 +15,9 @@
   "carpet.rule.noPlayerPortals.name": "No Player Portals",
   "carpet.rule.noPlayerPortals.desc": "Prevents players from using portals",
   "carpet.rule.disableObservers.name": "Disable Observers",
-  "carpet.rule.disableObservers.desc": "Observers don't detect block updates"
+  "carpet.rule.disableObservers.desc": "Observers don't detect block updates",
+  "carpet.rule.strongerBundle.name": "Stronger Bundle",
+  "carpet.rule.strongerBundle.desc": "Allows shulker boxes to be inserted into bundles (max 8), prevents bundles in shulker boxes",
+  "item.bundle.insert.success": "Inserted %s × %s",
+  "item.bundle.insert.fail": "Cannot insert %s (bundle is full)"
 }

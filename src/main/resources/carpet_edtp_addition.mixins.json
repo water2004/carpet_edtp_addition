@@ -9,7 +9,10 @@
     "TeleportCommandMixin",
     "TickCommandMixin",
     "AbstractFurnaceBlockEntityMixin",
-    "ObserverBlockMixin"
+    "ObserverBlockMixin",
+    "BundleContentsComponentMixin",
+    "ShulkerBoxBlockEntityMixin",
+    "ShulkerBoxSlotMixin"
   ],
   "injectors": {
     "defaultRequire": 1

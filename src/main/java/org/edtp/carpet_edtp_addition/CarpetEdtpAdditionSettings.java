@@ -53,6 +53,12 @@ public class CarpetEdtpAdditionSettings {
         "Observers don't detect block updates"
     );
     
+    public static final EdtpCarpetRule strongerBundle = new EdtpCarpetRule(
+        "strongerBundle",
+        false,
+        "Allows shulker boxes to be inserted into bundles (max 8), prevents bundles in shulker boxes"
+    );
+    
     public static void register() {
         CarpetServer.settingsManager.addCarpetRule(softObsidian);
         CarpetServer.settingsManager.addCarpetRule(unPushableArmorStands);
@@ -61,6 +67,7 @@ public class CarpetEdtpAdditionSettings {
         CarpetServer.settingsManager.addCarpetRule(noFurnaceAsh);
         CarpetServer.settingsManager.addCarpetRule(noPlayerPortals);
         CarpetServer.settingsManager.addCarpetRule(disableObservers);
+        CarpetServer.settingsManager.addCarpetRule(strongerBundle);
     }
     
     public static class EdtpCarpetRule implements CarpetRule<Boolean> {
