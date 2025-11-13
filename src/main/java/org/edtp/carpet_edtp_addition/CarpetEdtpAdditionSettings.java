@@ -59,6 +59,12 @@ public class CarpetEdtpAdditionSettings {
         "Allows shulker boxes to be inserted into bundles (max 8), prevents bundles in shulker boxes"
     );
     
+    public static final EdtpCarpetRule toughArmorStands = new EdtpCarpetRule(
+        "toughArmorStands",
+        false,
+        "Armor stands won't take damage from attacks"
+    );
+    
     public static void register() {
         CarpetServer.settingsManager.addCarpetRule(softObsidian);
         CarpetServer.settingsManager.addCarpetRule(unPushableArmorStands);
@@ -68,6 +74,7 @@ public class CarpetEdtpAdditionSettings {
         CarpetServer.settingsManager.addCarpetRule(noPlayerPortals);
         CarpetServer.settingsManager.addCarpetRule(disableObservers);
         CarpetServer.settingsManager.addCarpetRule(strongerBundle);
+        CarpetServer.settingsManager.addCarpetRule(toughArmorStands);
     }
     
     public static class EdtpCarpetRule implements CarpetRule<Boolean> {

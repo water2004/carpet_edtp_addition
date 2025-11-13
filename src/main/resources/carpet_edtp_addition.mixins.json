@@ -12,7 +12,8 @@
     "ObserverBlockMixin",
     "BundleContentsComponentMixin",
     "ShulkerBoxBlockEntityMixin",
-    "ShulkerBoxSlotMixin"
+    "ShulkerBoxSlotMixin",
+    "ArmorStandEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

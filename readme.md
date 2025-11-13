@@ -13,3 +13,7 @@
 `noPlayerPortals`: 玩家无法使用末地传送门和下界传送门
 
 `disableObservers`: 侦测器不检测方块更新
+
+`strongerBundle`: 允许最多八个潜影盒放入收纳袋, 同时禁止将收纳袋放入潜影盒
+
+`toughArmorStands`: 攻击不会使得盔甲架掉落

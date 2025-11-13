@@ -18,6 +18,8 @@
   "carpet.rule.disableObservers.desc": "Observers don't detect block updates",
   "carpet.rule.strongerBundle.name": "Stronger Bundle",
   "carpet.rule.strongerBundle.desc": "Allows shulker boxes to be inserted into bundles (max 8), prevents bundles in shulker boxes",
+  "carpet.rule.toughArmorStands.name": "Tough Armor Stands",
+  "carpet.rule.toughArmorStands.desc": "Armor stands won't take damage from attacks",
   "item.bundle.insert.success": "Inserted %s × %s",
   "item.bundle.insert.fail": "Cannot insert %s (bundle is full)"
 }

@@ -18,6 +18,8 @@
   "carpet.rule.disableObservers.desc": "侦测器不检测方块更新",
   "carpet.rule.strongerBundle.name": "更强的收纳袋",
   "carpet.rule.strongerBundle.desc": "允许将潜影盒放入收纳袋中(最多8个),防止收纳袋放入潜影盒",
+  "carpet.rule.toughArmorStands.name": "坚韧盔甲架",
+  "carpet.rule.toughArmorStands.desc": "盔甲架被攻击时不会受到伤害",
   "item.bundle.insert.success": "已放入 %s × %s",
   "item.bundle.insert.fail": "无法放入 %s (收纳袋已满)"
 }
