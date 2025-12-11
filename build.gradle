@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.12-SNAPSHOT'
+    id 'fabric-loom' version '1.14-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -52,7 +52,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     
     // Carpet Core
-    modImplementation "carpet:fabric-carpet:1.21.10-1.4.188+v251016"
+    modImplementation "carpet:fabric-carpet:1.21.11-1.4.193+v251211"
     
     // Mixin Extras
     implementation 'io.github.llamalad7:mixinextras-common:0.3.6'
