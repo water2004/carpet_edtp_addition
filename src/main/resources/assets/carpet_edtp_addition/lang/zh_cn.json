@@ -10,6 +10,7 @@
   "carpet.rule.safeTeleport.suffocation": "目标位置会导致窒息,传送被阻止!",
   "carpet.rule.tickCommandForAll.name": "所有人可用Tick指令",
   "carpet.rule.tickCommandForAll.desc": "允许非OP玩家使用/tick指令",
+  "carpet.rule.noBeesInNetherEnd.name": "地狱和末地无蜜蜂",
   "carpet.rule.noFurnaceAsh.name": "无需掏炉灰",
   "carpet.rule.noFurnaceAsh.desc": "没有配方的物品瞬间通过熔炉,避免浪费燃料",
   "carpet.rule.noPlayerPortals.name": "禁止传送门",
