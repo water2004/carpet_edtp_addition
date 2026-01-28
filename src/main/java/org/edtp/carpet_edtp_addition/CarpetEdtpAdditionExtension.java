@@ -25,6 +25,6 @@ public class CarpetEdtpAdditionExtension implements CarpetExtension {
     
     @Override
     public Map<String, String> canHasTranslations(String lang) {
-        return Translation.getInstance().getTranslation();
+        return Translation.getInstance().getTranslation(lang);
     }
 }
