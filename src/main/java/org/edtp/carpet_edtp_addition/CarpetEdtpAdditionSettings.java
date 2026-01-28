@@ -169,5 +169,10 @@ public class CarpetEdtpAdditionSettings {
                 settingsManager().notifyRuleChanged(source, this, value.toString());
             }
         }
+
+        @Override
+        public String toString() {
+            return name;
+        }
     }
 }
