@@ -11,14 +11,14 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "org.edtp.carpet_edtp_addition.Carpet_edtp_addition"
+      "org.edtp.carpet_edtp_addition.CarpetEdtpAddition"
     ]
   },
   "mixins": [
     "carpet_edtp_addition.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=${loader_version}",
+    "fabricloader": ">=0.18.0",
     "fabric": "*",
     "minecraft": "${minecraft_version}",
     "carpet": "*"
