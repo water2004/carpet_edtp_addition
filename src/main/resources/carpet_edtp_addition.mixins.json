@@ -1,19 +1,23 @@
 {
   "required": true,
   "minVersion": "0.8",
+  "refmap": "carpet_edtp_addition.refmap.json",
   "package": "org.edtp.carpet_edtp_addition.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "AbstractBlockStateMixin",
-    "LivingEntityMixin",
-    "TeleportCommandMixin",
-    "TickCommandMixin",
     "AbstractFurnaceBlockEntityMixin",
-    "ObserverBlockMixin",
+    "ArmorStandEntityMixin",
+    "BeehiveBlockEntityMixin",
+    "BeeMixin",
     "BundleContentsComponentMixin",
+    "EntityAccessor",
+    "LivingEntityMixin",
+    "ObserverBlockMixin",
     "ShulkerBoxBlockEntityMixin",
     "ShulkerBoxSlotMixin",
-    "ArmorStandEntityMixin"
+    "TeleportCommandMixin",
+    "TickCommandMixin"
   ],
   "injectors": {
     "defaultRequire": 1
