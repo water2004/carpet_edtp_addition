@@ -47,12 +47,6 @@ public class CarpetEdtpAdditionSettings {
         "Prevents players from using portals"
     );
     
-    public static final EdtpCarpetRule disableObservers = new EdtpCarpetRule(
-        "disableObservers",
-        false,
-        "Observers don't detect block updates"
-    );
-    
     public static final EdtpCarpetRule strongerBundle = new EdtpCarpetRule(
         "strongerBundle",
         false,
@@ -84,7 +78,6 @@ public class CarpetEdtpAdditionSettings {
         CarpetServer.settingsManager.addCarpetRule(tickCommandForAll);
         CarpetServer.settingsManager.addCarpetRule(noFurnaceAsh);
         CarpetServer.settingsManager.addCarpetRule(noPlayerPortals);
-        CarpetServer.settingsManager.addCarpetRule(disableObservers);
         CarpetServer.settingsManager.addCarpetRule(strongerBundle);
         CarpetServer.settingsManager.addCarpetRule(toughArmorStands);
         CarpetServer.settingsManager.addCarpetRule(toughSlimeBlocks);

@@ -16,8 +16,6 @@
   "carpet.rule.noFurnaceAsh.desc": "Items without recipes pass through furnaces instantly, preventing ash waste",
   "carpet.rule.noPlayerPortals.name": "No Player Portals",
   "carpet.rule.noPlayerPortals.desc": "Prevents players from using portals",
-  "carpet.rule.disableObservers.name": "Disable Observers",
-  "carpet.rule.disableObservers.desc": "Observers don't detect block updates",
   "carpet.rule.strongerBundle.name": "Stronger Bundle",
   "carpet.rule.strongerBundle.desc": "Allows shulker boxes to be inserted into bundles (max 8), prevents bundles in shulker boxes",
   "carpet.rule.toughArmorStands.name": "Tough Armor Stands",
