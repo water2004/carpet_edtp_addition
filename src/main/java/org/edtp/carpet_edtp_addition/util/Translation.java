@@ -27,10 +27,9 @@ public class Translation {
         return TRANSLATION;
     }
 
-    public Map<String, String> getTranslation() {
-        // 默认使用英文语言
-        String lang = "en_us";
-        return this.translations.computeIfAbsent(lang, this::loadTranslation);
+    public Map<String, String> getTranslation(String lang) {
+        String selectedLang = (lang == null || lang.isBlank()) ? "en_us" : lang;
+        return this.translations.computeIfAbsent(selectedLang, this::loadTranslation);
     }
 
     private Map<String, String> loadTranslation(String lang) {

@@ -3,7 +3,7 @@ package org.edtp.carpet_edtp_addition;
 import net.fabricmc.api.ModInitializer;
 import carpet.CarpetServer;
 
-public class Carpet_edtp_addition implements ModInitializer {
+public class CarpetEdtpAddition implements ModInitializer {
 
     @Override
     public void onInitialize() {
