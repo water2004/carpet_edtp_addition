@@ -9,7 +9,6 @@
     "BeeMixin",
     "BundleContentsComponentMixin",
     "LivingEntityMixin",
-    "ObserverBlockMixin",
     "ShulkerBoxBlockEntityMixin",
     "ShulkerBoxSlotMixin",
     "TeleportCommandMixin",
