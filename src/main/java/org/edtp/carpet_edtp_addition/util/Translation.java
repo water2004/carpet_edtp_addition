@@ -44,7 +44,7 @@ public class Translation {
             }
             return map;
         } catch (IOException e) {
-            throw new IllegalStateException("未能成功读取语言文件", e);
+            throw new IllegalStateException("Failed to read language file: " + lang, e);
         }
     }
 
