@@ -33,13 +33,10 @@ public class BeehiveBlockEntityMixin {
         @Nullable BlockPos flowerPos,
         CallbackInfoReturnable<Boolean> cir
     ) {
-        if (!CarpetEdtpAdditionSettings.beesDimCurfew.value()) {
-            return;
-        }
         if (world == null) {
             return;
         }
-        if (world.getRegistryKey() == World.NETHER || world.getRegistryKey() == World.END) {
+        if (CarpetEdtpAdditionSettings.isBeesDimCurfewEnabled(world)) {
             cir.setReturnValue(false);
         }
     }
