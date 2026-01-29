@@ -21,10 +21,14 @@ public class CarpetEdtpAdditionExtension implements CarpetExtension {
 
     @Override
     public String version() {
+<<<<<<< HEAD
         return FabricLoader.getInstance()
             .getModContainer("carpet_edtp_addition")
             .map(container -> container.getMetadata().getVersion().getFriendlyString())
             .orElse("unknown");
+=======
+        return "${mod_version}";
+>>>>>>> fc29e08b0282141f2485d46797c0333a75ba60a7
     }
     
     @Override
