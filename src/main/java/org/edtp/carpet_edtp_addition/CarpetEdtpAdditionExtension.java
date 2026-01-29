@@ -1,7 +1,6 @@
 package org.edtp.carpet_edtp_addition;
 
 import carpet.CarpetExtension;
-import carpet.CarpetServer;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.util.HashMap;
