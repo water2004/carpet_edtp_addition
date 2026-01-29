@@ -6,6 +6,8 @@ import carpet.CarpetServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -71,18 +73,23 @@ public class CarpetEdtpAdditionSettings {
         "false",
         "In the Nether/End, forces bees to enter hives and prevents them from leaving. Options: false, nether, end, true"
     );
-    
+
     public static void register() {
-        CarpetServer.settingsManager.addCarpetRule(softObsidian);
-        CarpetServer.settingsManager.addCarpetRule(unPushableArmorStands);
-        CarpetServer.settingsManager.addCarpetRule(safeTeleport);
-        CarpetServer.settingsManager.addCarpetRule(tickCommandForAll);
-        CarpetServer.settingsManager.addCarpetRule(noFurnaceAsh);
-        CarpetServer.settingsManager.addCarpetRule(noPlayerPortals);
-        CarpetServer.settingsManager.addCarpetRule(strongerBundle);
-        CarpetServer.settingsManager.addCarpetRule(toughArmorStands);
-        CarpetServer.settingsManager.addCarpetRule(toughSlimeBlocks);
-        CarpetServer.settingsManager.addCarpetRule(beesDimCurfew);
+        try {
+            for (Field field : CarpetEdtpAdditionSettings.class.getDeclaredFields()) {
+                int modifiers = field.getModifiers();
+                if (Modifier.isPublic(modifiers) && 
+                    Modifier.isStatic(modifiers) && 
+                    Modifier.isFinal(modifiers) &&
+                    CarpetRule.class.isAssignableFrom(field.getType())) {
+                    
+                    CarpetRule<?> rule = (CarpetRule<?>) field.get(null);
+                    CarpetServer.settingsManager.addCarpetRule(rule);
+                }
+            }
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException("Failed to register Carpet rules via reflection", e);
+        }
     }
 
     public static boolean isBeesDimCurfewEnabled(World world) {

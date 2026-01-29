@@ -2,6 +2,7 @@ package org.edtp.carpet_edtp_addition;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
+import net.fabricmc.loader.api.FabricLoader;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +21,10 @@ public class CarpetEdtpAdditionExtension implements CarpetExtension {
 
     @Override
     public String version() {
-        return "1.0.0";
+        return FabricLoader.getInstance()
+            .getModContainer("carpet_edtp_addition")
+            .map(container -> container.getMetadata().getVersion().getFriendlyString())
+            .orElse("unknown");
     }
     
     @Override
