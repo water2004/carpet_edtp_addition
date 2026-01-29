@@ -14,11 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class BeeMixin {
 	@Inject(method = "canEnterHive", at = @At("HEAD"), cancellable = true)
 	private void forceEnterHiveInNetherEnd(CallbackInfoReturnable<Boolean> cir) {
-		if (!CarpetEdtpAdditionSettings.noBeesInNetherEnd.value()) {
-			return;
-		}
 		World world = ((EntityAccessor)(Object)this).carpet_edtp_addition$getWorld();
-		if (world != null && (world.getRegistryKey() == World.NETHER || world.getRegistryKey() == World.END)) {
+		if (CarpetEdtpAdditionSettings.isBeesDimCurfewEnabled(world)) {
 			cir.setReturnValue(true);
 		}
 	}

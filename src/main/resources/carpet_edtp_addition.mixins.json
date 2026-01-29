@@ -13,7 +13,6 @@
     "BundleContentsComponentMixin",
     "EntityAccessor",
     "LivingEntityMixin",
-    "ObserverBlockMixin",
     "ShulkerBoxBlockEntityMixin",
     "ShulkerBoxSlotMixin",
     "TeleportCommandMixin",

@@ -5,9 +5,10 @@ import carpet.api.settings.SettingsManager;
 import carpet.CarpetServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
-
+import net.minecraft.world.World;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
 public class CarpetEdtpAdditionSettings {
     
@@ -47,12 +48,6 @@ public class CarpetEdtpAdditionSettings {
         "Prevents players from using portals"
     );
     
-    public static final EdtpCarpetRule disableObservers = new EdtpCarpetRule(
-        "disableObservers",
-        false,
-        "Observers don't detect block updates"
-    );
-    
     public static final EdtpCarpetRule strongerBundle = new EdtpCarpetRule(
         "strongerBundle",
         false,
@@ -71,10 +66,10 @@ public class CarpetEdtpAdditionSettings {
         "Set the hardness of slime blocks and honey blocks to be the same as end stone"
     );
 
-    public static final EdtpCarpetRule noBeesInNetherEnd = new EdtpCarpetRule(
-        "noBeesInNetherEnd",
-        false,
-        "In the Nether/End, forces bees to want to enter hives and prevents them from leaving"
+    public static final EdtpCarpetStringRule beesDimCurfew = new EdtpCarpetStringRule(
+        "beesDimCurfew",
+        "false",
+        "In the Nether/End, forces bees to enter hives and prevents them from leaving. Options: false, nether, end, true"
     );
     
     public static void register() {
@@ -84,11 +79,34 @@ public class CarpetEdtpAdditionSettings {
         CarpetServer.settingsManager.addCarpetRule(tickCommandForAll);
         CarpetServer.settingsManager.addCarpetRule(noFurnaceAsh);
         CarpetServer.settingsManager.addCarpetRule(noPlayerPortals);
-        CarpetServer.settingsManager.addCarpetRule(disableObservers);
         CarpetServer.settingsManager.addCarpetRule(strongerBundle);
         CarpetServer.settingsManager.addCarpetRule(toughArmorStands);
         CarpetServer.settingsManager.addCarpetRule(toughSlimeBlocks);
-        CarpetServer.settingsManager.addCarpetRule(noBeesInNetherEnd);
+        CarpetServer.settingsManager.addCarpetRule(beesDimCurfew);
+    }
+
+    public static boolean isBeesDimCurfewEnabled(World world) {
+        if (world == null) {
+            return false;
+        }
+        String value = beesDimCurfew.value();
+        if (value == null) {
+            return false;
+        }
+        String normalized = value.trim().toLowerCase(Locale.ROOT);
+        if (normalized.equals("true") || normalized.equals("both")) {
+            return world.getRegistryKey() == World.NETHER || world.getRegistryKey() == World.END;
+        }
+        if (normalized.equals("false")) {
+            return false;
+        }
+        if (normalized.equals("nether") || normalized.equals("the_nether")) {
+            return world.getRegistryKey() == World.NETHER;
+        }
+        if (normalized.equals("end") || normalized.equals("the_end")) {
+            return world.getRegistryKey() == World.END;
+        }
+        return false;
     }
     
     public static class EdtpCarpetRule implements CarpetRule<Boolean> {
@@ -167,6 +185,83 @@ public class CarpetEdtpAdditionSettings {
             this.value = value;
             if (source != null) {
                 settingsManager().notifyRuleChanged(source, this, value.toString());
+            }
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+
+    public static class EdtpCarpetStringRule implements CarpetRule<String> {
+        private final String name;
+        private final String description;
+        private String value;
+        private final String defaultValue;
+
+        public EdtpCarpetStringRule(String name, String defaultValue, String description) {
+            this.name = name;
+            this.defaultValue = defaultValue;
+            this.value = defaultValue;
+            this.description = description;
+        }
+
+        @Override
+        public String name() {
+            return name;
+        }
+
+        @Override
+        public List<Text> extraInfo() {
+            return List.of();
+        }
+
+        @Override
+        public Collection<String> categories() {
+            return List.of("SURVIVAL", "EDTP");
+        }
+
+        @Override
+        public Collection<String> suggestions() {
+            return List.of("false", "nether", "end", "true");
+        }
+
+        @Override
+        public SettingsManager settingsManager() {
+            return CarpetServer.settingsManager;
+        }
+
+        @Override
+        public String value() {
+            return value;
+        }
+
+        @Override
+        public boolean canBeToggledClientSide() {
+            return false;
+        }
+
+        @Override
+        public Class<String> type() {
+            return String.class;
+        }
+
+        @Override
+        public String defaultValue() {
+            return defaultValue;
+        }
+
+        @Override
+        public boolean strict() {
+            return true;
+        }
+
+        @Override
+        public void set(ServerCommandSource source, String value) {
+            this.value = value;
+            if (source != null) {
+                settingsManager().notifyRuleChanged(source, this, value);
             }
         }
 

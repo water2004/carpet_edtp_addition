@@ -1,21 +1,35 @@
-# 规则列表
+# Carpet EDTP Addition
 
-`softObsidian`: 设置黑曜石的硬度与末地石相同
+为 Carpet Mod 提供一组简洁、实用的生存规则扩展。
 
-`unPushableArmorStands`: 盔甲架不会被攻击、爆炸或流体推动
+## 使用方式
 
-`safeTeleport`: 阻止传送到不安全的位置(虚空、窒息)
+- 查看规则：`/carpet`
+- 设置规则：`/carpet <规则名> <值>`
 
-`tickCommandForAll`: 允许非OP玩家使用/tick指令
+示例：
 
-`noFurnaceAsh`: 没有配方的物品瞬间通过熔炉,避免手动清理熔炉
+- `/carpet safeTeleport true`
+- `/carpet beesDimCurfew nether`
 
-`noPlayerPortals`: 玩家无法使用末地传送门和下界传送门
+## 规则列表
 
-`disableObservers`: 侦测器不检测方块更新
+| 规则名 | 默认值 | 说明 | 可选值 |
+| --- | --- | --- | --- |
+| `softObsidian` | `false` | 设置黑曜石硬度与末地石相同 | `true` / `false` |
+| `unPushableArmorStands` | `false` | 盔甲架不会被攻击、爆炸或流体推动 | `true` / `false` |
+| `safeTeleport` | `false` | 阻止传送到不安全位置（虚空、窒息） | `true` / `false` |
+| `tickCommandForAll` | `false` | 允许非 OP 玩家使用 `/tick` 指令 | `true` / `false` |
+| `noFurnaceAsh` | `false` | 没有配方的物品瞬间通过熔炉，避免手动清理熔炉 | `true` / `false` |
+| `noPlayerPortals` | `false` | 玩家无法使用末地传送门与下界传送门 | `true` / `false` |
+| `strongerBundle` | `false` | 允许最多 8 个潜影盒放入收纳袋，同时禁止将收纳袋放入潜影盒 | `true` / `false` |
+| `toughArmorStands` | `false` | 攻击不会使盔甲架掉落 | `true` / `false` |
+| `toughSlimeBlocks` | `false` | 设置粘液块和蜂蜜块硬度与末地石相同 | `true` / `false` |
+| `beesDimCurfew` | `false` | 阻止蜜蜂在下界与末地工作并立即归巢（模拟 1.21.2 以前可能出现的行为） | `false` / `nether` / `end` / `true` |
 
-`strongerBundle`: 允许最多八个潜影盒放入收纳袋, 同时禁止将收纳袋放入潜影盒
+## 说明
 
-`toughArmorStands`: 攻击不会使得盔甲架掉落
-
-`toughSlimeBlocks`: 设置粘液块和蜂蜜块的硬度与末地石相同
+- `beesDimCurfew`：
+  - `nether` 仅下界生效
+  - `end` 仅末地生效
+  - `true` 下界和末地均生效
