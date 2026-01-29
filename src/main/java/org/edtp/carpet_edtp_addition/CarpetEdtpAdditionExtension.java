@@ -2,10 +2,7 @@ package org.edtp.carpet_edtp_addition;
 
 import carpet.CarpetExtension;
 import net.fabricmc.loader.api.FabricLoader;
-
-import java.util.HashMap;
 import java.util.Map;
-
 import org.edtp.carpet_edtp_addition.util.Translation;
 
 public class CarpetEdtpAdditionExtension implements CarpetExtension {
