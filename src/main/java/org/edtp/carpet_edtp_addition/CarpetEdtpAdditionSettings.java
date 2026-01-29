@@ -71,8 +71,8 @@ public class CarpetEdtpAdditionSettings {
         "Set the hardness of slime blocks and honey blocks to be the same as end stone"
     );
 
-    public static final EdtpCarpetRule noBeesInNetherEnd = new EdtpCarpetRule(
-        "noBeesInNetherEnd",
+    public static final EdtpCarpetRule beesDimCurfew = new EdtpCarpetRule(
+        "beesDimCurfew",
         false,
         "In the Nether/End, forces bees to want to enter hives and prevents them from leaving"
     );
@@ -88,7 +88,7 @@ public class CarpetEdtpAdditionSettings {
         CarpetServer.settingsManager.addCarpetRule(strongerBundle);
         CarpetServer.settingsManager.addCarpetRule(toughArmorStands);
         CarpetServer.settingsManager.addCarpetRule(toughSlimeBlocks);
-        CarpetServer.settingsManager.addCarpetRule(noBeesInNetherEnd);
+        CarpetServer.settingsManager.addCarpetRule(beesDimCurfew);
     }
     
     public static class EdtpCarpetRule implements CarpetRule<Boolean> {
