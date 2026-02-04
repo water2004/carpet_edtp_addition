@@ -74,6 +74,12 @@ public class CarpetEdtpAdditionSettings {
         "In the Nether/End, forces bees to enter hives and prevents them from leaving. Options: false, nether, end, true"
     );
 
+    public static final EdtpCarpetRule resonantWater = new EdtpCarpetRule(
+        "resonantWater",
+        false,
+        "左右逢源 - Water buckets won't be consumed when surrounded by water buckets in the hotbar"
+    );
+
     public static void register() {
         try {
             for (Field field : CarpetEdtpAdditionSettings.class.getDeclaredFields()) {

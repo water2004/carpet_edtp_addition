@@ -10,6 +10,7 @@
     "ArmorStandEntityMixin",
     "BeehiveBlockEntityMixin",
     "BeeMixin",
+    "BucketItemMixin",
     "BundleContentsComponentMixin",
     "EntityAccessor",
     "LivingEntityMixin",

@@ -26,6 +26,7 @@
 | `toughArmorStands` | `false` | 攻击不会使盔甲架掉落 | `true` / `false` |
 | `toughSlimeBlocks` | `false` | 设置粘液块和蜂蜜块硬度与末地石相同 | `true` / `false` |
 | `beesDimCurfew` | `false` | 阻止蜜蜂在下界与末地工作并立即归巢（模拟 1.21.2 以前可能出现的行为） | `false` / `nether` / `end` / `true` |
+| `resonantWater` | `false` | 左右逢源：当快捷栏中水桶左右两侧都有水桶时，使用中间的水桶不会消耗 | `true` / `false` |
 
 ## 说明
 
@@ -33,3 +34,9 @@
   - `nether` 仅下界生效
   - `end` 仅末地生效
   - `true` 下界和末地均生效
+
+- `resonantWater` (左右逢源)：
+  - 在快捷栏中将三个水桶排成一排：`[水桶] [水桶] [水桶]`
+  - 使用中间的水桶时，水会被倒出但桶不会变空
+  - 触发时会播放回响锚设置重生点的音效
+  - 仅对非创造模式玩家生效
