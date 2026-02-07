@@ -24,6 +24,8 @@
   "carpet.rule.toughSlimeBlocks.desc": "Set the hardness of slime blocks and honey blocks to be the same as end stone",
   "carpet.rule.resonantWater.name": "Resonant Water",
   "carpet.rule.resonantWater.desc": "Water buckets won't be consumed when surrounded by water buckets in the hotbar",
+  "carpet.rule.villagerMaxEnchantLevel.name": "Villager Max Enchantment Level",
+  "carpet.rule.villagerMaxEnchantLevel.desc": "Adjust max enchantment level for villager tools. 0:Off 1:Toolsmith sells enchanted diamond hoe (max 19) 2:Max 25 3:Max 33 4:Max 65",
   "item.bundle.insert.success": "Inserted %s × %s",
   "item.bundle.insert.fail": "Cannot insert %s (bundle is full)"
 }
