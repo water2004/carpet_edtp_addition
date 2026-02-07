@@ -16,6 +16,7 @@
     "LivingEntityMixin",
     "ShulkerBoxBlockEntityMixin",
     "ShulkerBoxSlotMixin",
+    "SellEnchantedToolFactoryMixin",
     "TeleportCommandMixin",
     "TickCommandMixin"
   ],
