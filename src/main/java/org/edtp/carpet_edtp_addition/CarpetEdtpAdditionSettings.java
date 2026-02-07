@@ -130,7 +130,6 @@ public class CarpetEdtpAdditionSettings {
     
     public static class EdtpCarpetRule implements CarpetRule<Boolean> {
         private final String name;
-        private final String description;
         private Boolean value;
         private final Boolean defaultValue;
         
@@ -138,7 +137,6 @@ public class CarpetEdtpAdditionSettings {
             this.name = name;
             this.defaultValue = defaultValue;
             this.value = defaultValue;
-            this.description = description;
         }
         
         @Override
@@ -215,7 +213,6 @@ public class CarpetEdtpAdditionSettings {
 
     public static class EdtpCarpetIntegerRule implements CarpetRule<Integer> {
         private final String name;
-        private final String description;
         private Integer value;
         private final Integer defaultValue;
 
@@ -223,7 +220,6 @@ public class CarpetEdtpAdditionSettings {
             this.name = name;
             this.defaultValue = defaultValue;
             this.value = defaultValue;
-            this.description = description;
         }
 
         @Override
@@ -301,7 +297,6 @@ public class CarpetEdtpAdditionSettings {
 
     public static class EdtpCarpetStringRule implements CarpetRule<String> {
         private final String name;
-        private final String description;
         private String value;
         private final String defaultValue;
 
@@ -309,7 +304,6 @@ public class CarpetEdtpAdditionSettings {
             this.name = name;
             this.defaultValue = defaultValue;
             this.value = defaultValue;
-            this.description = description;
         }
 
         @Override
