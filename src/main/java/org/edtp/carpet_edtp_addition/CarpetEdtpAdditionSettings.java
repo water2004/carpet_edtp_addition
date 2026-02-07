@@ -80,6 +80,12 @@ public class CarpetEdtpAdditionSettings {
         "左右逢源 - Water buckets won't be consumed when surrounded by water buckets in the hotbar"
     );
 
+    public static final EdtpCarpetIntegerRule villagerMaxEnchantLevel = new EdtpCarpetIntegerRule(
+        "villagerMaxEnchantLevel",
+        0,
+        "Adjust villager max enchantment level. 0: Off, 1: Toolsmith sells ench. diamond hoe (max 19), 2: max 25, 3: max 33, 4: max 65"
+    );
+
     public static void register() {
         try {
             for (Field field : CarpetEdtpAdditionSettings.class.getDeclaredFields()) {
@@ -199,6 +205,92 @@ public class CarpetEdtpAdditionSettings {
             if (source != null) {
                 settingsManager().notifyRuleChanged(source, this, value.toString());
             }
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+
+    public static class EdtpCarpetIntegerRule implements CarpetRule<Integer> {
+        private final String name;
+        private final String description;
+        private Integer value;
+        private final Integer defaultValue;
+
+        public EdtpCarpetIntegerRule(String name, Integer defaultValue, String description) {
+            this.name = name;
+            this.defaultValue = defaultValue;
+            this.value = defaultValue;
+            this.description = description;
+        }
+
+        @Override
+        public String name() {
+            return name;
+        }
+
+        @Override
+        public List<Text> extraInfo() {
+            return List.of();
+        }
+
+        @Override
+        public Collection<String> categories() {
+            return List.of("SURVIVAL", "EDTP");
+        }
+
+        @Override
+        public Collection<String> suggestions() {
+            return List.of("0", "1", "2", "3", "4");
+        }
+
+        @Override
+        public SettingsManager settingsManager() {
+            return CarpetServer.settingsManager;
+        }
+
+        @Override
+        public Integer value() {
+            return value;
+        }
+
+        @Override
+        public boolean canBeToggledClientSide() {
+            return false;
+        }
+
+        @Override
+        public Class<Integer> type() {
+            return Integer.class;
+        }
+
+        @Override
+        public Integer defaultValue() {
+            return defaultValue;
+        }
+
+        @Override
+        public boolean strict() {
+            return false;
+        }
+
+        @Override
+        public void set(ServerCommandSource source, String value) {
+            try {
+                this.value = Integer.parseInt(value);
+                if (source != null) {
+                    settingsManager().notifyRuleChanged(source, this, value);
+                }
+            } catch (NumberFormatException ignored) {}
+        }
+        
+        public void set(ServerCommandSource source, Integer value) {
+             this.value = value;
+             if (source != null) {
+                 settingsManager().notifyRuleChanged(source, this, value.toString());
+             }
         }
 
         @Override
