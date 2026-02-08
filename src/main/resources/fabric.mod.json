@@ -21,6 +21,6 @@
     "fabricloader": ">=0.18.0",
     "fabric": "*",
     "minecraft": "${minecraft_version}",
-    "carpet": "*"
+    "carpet": ">=1.4.193+v251211"
   }
 }

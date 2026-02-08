@@ -29,12 +29,7 @@ fabricApi {
 
 repositories {
     maven {
-        name = 'Masa Mods'
         url = 'https://masa.dy.fi/maven'
-    }
-    maven {
-        name = 'Carpet'
-        url = 'https://maven.fabricmc.net/'
     }
 }
 
