@@ -28,7 +28,7 @@
 | `beesDimCurfew` | `false` | 阻止蜜蜂在下界与末地工作并立即归巢（模拟 1.21.2 以前可能出现的行为） | `false` / `nether` / `end` / `true` |
 | `resonantWater` | `false` | 左右逢源：当快捷栏中水桶左右两侧都有水桶时，使用中间的水桶不会消耗 | `true` / `false` |
 | `villagerMaxEnchantLevel` | `0` | 调节村民出售附魔工具的最高附魔等级 | `0` / `1` / `2` / `3` / `4` |
-| `dispenserFillsCauldron` | `false` | 发射器可以填充/取出炼药锅中的水/岩浆 | `true` / `false` |
+| `dispenserFillsCauldron` | `false` | 发射器可以填充/取出炼药锅中的水/岩浆/细雪（和玩家的交互行为一样） | `true` / `false` |
 
 ## 说明
 
