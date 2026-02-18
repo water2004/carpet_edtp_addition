@@ -12,6 +12,7 @@
     "BeeMixin",
     "BucketItemMixin",
     "BundleContentsComponentMixin",
+    "DispenserBehaviorMixin",
     "EntityAccessor",
     "LivingEntityMixin",
     "ShulkerBoxBlockEntityMixin",

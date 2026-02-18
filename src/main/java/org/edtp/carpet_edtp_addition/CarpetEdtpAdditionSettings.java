@@ -86,6 +86,12 @@ public class CarpetEdtpAdditionSettings {
         "Adjust villager max enchantment level. 0: Off, 1: Toolsmith sells ench. diamond hoe (max 19), 2: max 25, 3: max 33, 4: max 65"
     );
 
+    public static final EdtpCarpetRule dispenserFillsCauldron = new EdtpCarpetRule(
+        "dispenserFillsCauldron",
+        false,
+        "Dispensers can fill/empty cauldrons with water/lava/powder snow buckets and empty buckets"
+    );
+
     public static void register() {
         try {
             for (Field field : CarpetEdtpAdditionSettings.class.getDeclaredFields()) {

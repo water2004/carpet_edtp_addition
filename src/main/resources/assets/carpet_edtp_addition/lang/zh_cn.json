@@ -26,6 +26,8 @@
   "carpet.rule.resonantWater.desc": "当快捷栏中水桶左右两侧都有水桶时,使用中间的水桶不会消耗",
   "carpet.rule.villagerMaxEnchantLevel.name": "村民附魔等级调节",
   "carpet.rule.villagerMaxEnchantLevel.desc": "调节村民出售附魔工具的最高附魔等级。0:关闭 1:工具匠出售附魔钻石锄(最高19) 2:最高25 3:最高33 4:最高65",
+  "carpet.rule.dispenserFillsCauldron.name": "发射器填充炼药锅",
+  "carpet.rule.dispenserFillsCauldron.desc": "发射器可用水桶/岩浆桶/细雪桶/空桶填充或取出炼药锅",
   "item.bundle.insert.success": "已放入 %s × %s",
   "item.bundle.insert.fail": "无法放入 %s (收纳袋已满)"
 }
