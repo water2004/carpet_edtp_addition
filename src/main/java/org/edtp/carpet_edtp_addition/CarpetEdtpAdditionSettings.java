@@ -207,7 +207,7 @@ public class CarpetEdtpAdditionSettings {
 
         @Override
         public String toString() {
-            return name;
+            return name + ": " + value;
         }
     }
 
@@ -291,7 +291,7 @@ public class CarpetEdtpAdditionSettings {
 
         @Override
         public String toString() {
-            return name;
+            return name + ": " + value;
         }
     }
 
@@ -366,7 +366,7 @@ public class CarpetEdtpAdditionSettings {
 
         @Override
         public String toString() {
-            return name;
+            return name + ": " + value;
         }
     }
 }
