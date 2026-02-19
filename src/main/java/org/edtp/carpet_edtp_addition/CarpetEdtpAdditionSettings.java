@@ -6,6 +6,8 @@ import carpet.CarpetServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Collection;
@@ -13,6 +15,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class CarpetEdtpAdditionSettings {
+    private static final Logger LOGGER = LoggerFactory.getLogger("CarpetEdtpAddition");
     
     public static final EdtpCarpetRule softObsidian = new EdtpCarpetRule(
         "softObsidian", 
@@ -102,7 +105,11 @@ public class CarpetEdtpAdditionSettings {
                     CarpetRule.class.isAssignableFrom(field.getType())) {
                     
                     CarpetRule<?> rule = (CarpetRule<?>) field.get(null);
-                    CarpetServer.settingsManager.addCarpetRule(rule);
+                    try {
+                        CarpetServer.settingsManager.addCarpetRule(rule);
+                    } catch (Exception e) {
+                        LOGGER.warn("Cannot register rule: '{}' - it may have been defined by another mod. Rule from other mod will be used.", rule.name(), e);
+                    }
                 }
             }
         } catch (IllegalAccessException e) {
