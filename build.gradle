@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.15.3'
+    id 'fabric-loom' version '1.15.4'
     id 'maven-publish'
 }
 
@@ -29,18 +29,22 @@ fabricApi {
 
 repositories {
     maven {
-        url = 'https://masa.dy.fi/maven'
+        name = "masa_carpet"
+        url = "https://masa.dy.fi/maven"
+    }
+    mavem {
+        name = "chocolate"
+        url = "https://chocolateminecraft.com/maven/"
     }
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.officialMojangMappings()
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modImplementation "carpet:fabric-carpet:1.21.11-1.4.193+v251211"
+    modImplementation "carpet:${project.carpet_version}"
 
     implementation 'io.github.llamalad7:mixinextras-common:0.3.6'
     annotationProcessor 'io.github.llamalad7:mixinextras-common:0.3.6'
@@ -59,7 +63,7 @@ processResources {
     }
 }
 
-def targetJavaVersion = 21
+def targetJavaVersion = 25
 tasks.withType(JavaCompile).configureEach {
     it.options.encoding = "UTF-8"
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
