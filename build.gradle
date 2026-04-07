@@ -40,11 +40,11 @@ repositories {
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modImplementation "carpet:${project.carpet_version}"
+    implementation "carpet:${project.carpet_version}"
 
     implementation 'io.github.llamalad7:mixinextras-common:0.3.6'
     annotationProcessor 'io.github.llamalad7:mixinextras-common:0.3.6'
