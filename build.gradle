@@ -28,6 +28,7 @@ fabricApi {
 }
 
 repositories {
+    mavenCentral()
     maven {
         name = "masa_carpet"
         url = "https://masa.dy.fi/maven"
