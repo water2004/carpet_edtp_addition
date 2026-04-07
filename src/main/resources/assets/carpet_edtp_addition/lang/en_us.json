@@ -28,6 +28,8 @@
   "carpet.rule.villagerMaxEnchantLevel.desc": "Adjust max enchantment level for villager tools. 0:Off 1:Toolsmith sells enchanted diamond hoe (max 19) 2:Max 25 3:Max 33 4:Max 65",
   "carpet.rule.dispenserFillsCauldron.name": "Dispenser Fills Cauldron",
   "carpet.rule.dispenserFillsCauldron.desc": "Dispensers can fill/empty cauldrons with water/lava/powder snow buckets and empty buckets",
+  "carpet.rule.tntBreaksWithoutDrops.name": "TNT Breaks Without Drops",
+  "carpet.rule.tntBreaksWithoutDrops.desc": "TNT explosions break blocks without dropping any items",
   "item.bundle.insert.success": "Inserted %s × %s",
   "item.bundle.insert.fail": "Cannot insert %s (bundle is full)"
 }
