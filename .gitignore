@@ -7,3 +7,6 @@ build
 bin
 .vscode
 libs/
+client.jar
+*.log
+*.tmp

@@ -26,6 +26,7 @@ public class BucketItemMixin {
      * 实现"左右逢源"(Resonant Water)功能：拦截 ItemUsage.exchangeStack 的调用
      * 当快捷栏中当前水桶的左右都是水桶时，使用水不消耗桶
      */
+    @SuppressWarnings("null")
     @Redirect(
         method = "use",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemUtils;createFilledResult(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/ItemStack;")

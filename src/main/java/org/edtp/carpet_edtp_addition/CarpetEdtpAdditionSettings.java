@@ -187,6 +187,7 @@ public class CarpetEdtpAdditionSettings {
             return false;
         }
         
+        @SuppressWarnings("null")
         @Override
         public Class<Boolean> type() {
             return Boolean.class;
@@ -270,6 +271,7 @@ public class CarpetEdtpAdditionSettings {
             return false;
         }
 
+        @SuppressWarnings("null")
         @Override
         public Class<Integer> type() {
             return Integer.class;
@@ -354,6 +356,7 @@ public class CarpetEdtpAdditionSettings {
             return false;
         }
 
+        @SuppressWarnings("null")
         @Override
         public Class<String> type() {
             return String.class;

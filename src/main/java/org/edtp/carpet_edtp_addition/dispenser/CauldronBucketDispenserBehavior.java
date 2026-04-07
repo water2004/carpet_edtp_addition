@@ -1,6 +1,7 @@
 package org.edtp.carpet_edtp_addition.dispenser;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
@@ -18,6 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.edtp.carpet_edtp_addition.CarpetEdtpAdditionSettings;
 
+@SuppressWarnings("null")
 public class CauldronBucketDispenserBehavior extends DefaultDispenseItemBehavior {
     public enum Mode {
         WATER_BUCKET,
@@ -61,7 +63,7 @@ public class CauldronBucketDispenserBehavior extends DefaultDispenseItemBehavior
     }
 
     @Override
-    protected void playAnimation(BlockSource pointer, net.minecraft.core.Direction side) {
+    protected void playAnimation(BlockSource pointer, Direction side) {
         if (this.delegated) {
             this.delegated = false;
             return;

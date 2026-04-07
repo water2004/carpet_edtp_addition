@@ -19,10 +19,7 @@ public class ShulkerBoxSlotMixin {
     @Inject(method = "mayPlace", at = @At("HEAD"), cancellable = true)
     private void preventBundleInsertion(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
         if (CarpetEdtpAdditionSettings.strongerBundle.value()) {
-            System.out.println("ShulkerBoxSlot canInsert called! Stack: " + stack.getItem().getName().getString());
-            // 如果是收纳袋,禁止放入
             if (stack.getItem() instanceof BundleItem) {
-                System.out.println("Blocking bundle insertion into shulker box via GUI!");
                 cir.setReturnValue(false);
             }
         }
