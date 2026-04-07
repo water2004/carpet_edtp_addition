@@ -32,7 +32,7 @@ repositories {
         name = "masa_carpet"
         url = "https://masa.dy.fi/maven"
     }
-    mavem {
+    maven {
         name = "chocolate"
         url = "https://chocolateminecraft.com/maven/"
     }
