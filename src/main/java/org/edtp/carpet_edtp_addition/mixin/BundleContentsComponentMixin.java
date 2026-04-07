@@ -1,6 +1,7 @@
 package org.edtp.carpet_edtp_addition.mixin;
 
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 import org.apache.commons.lang3.math.Fraction;
@@ -35,9 +36,9 @@ public class BundleContentsComponentMixin {
      * 这样一个收纳袋最多可以放 8 个潜影盒
      */
     @Inject(method = "getWeight", at = @At("HEAD"), cancellable = true)
-    private static void setShulkerBoxOccupancy(ItemStack stack, CallbackInfoReturnable<Fraction> cir) {
+    private static void setShulkerBoxOccupancy(ItemInstance stack, CallbackInfoReturnable<Fraction> cir) {
         if (CarpetEdtpAdditionSettings.strongerBundle.value()) {
-            if (stack.getItem() instanceof net.minecraft.world.item.BlockItem blockItem) {
+            if (stack.typeHolder().value() instanceof net.minecraft.world.item.BlockItem blockItem) {
                 if (blockItem.getBlock() instanceof ShulkerBoxBlock) {
                     // 设置潜影盒占用 1/8 空间,所以最多可以放 8 个
                     cir.setReturnValue(Fraction.getFraction(1, 8));

@@ -40,19 +40,30 @@ public class SellEnchantedToolFactoryMixin {
         }
 
         MerchantOffers offers = self.getOffers();
-        if (ruleValue >= 2) {
-            int maxEnchantLevel = edtp$getMaxEnchantLevel(ruleValue);
-            for (int i = 0; i < offers.size(); i++) {
-                MerchantOffer offer = offers.get(i);
-                if (edtp$isUpgradeableToolOffer(offer.getResult())) {
-                    ItemStack rerolled = edtp$createEnchantedTool(world, offer.getResult().getItem(), maxEnchantLevel);
+        int maxEnchantLevel = edtp$getMaxEnchantLevel(ruleValue);
+        boolean hasDiamondHoeOffer = false;
+        boolean hasEnchantedDiamondHoe = false;
+
+        for (int i = 0; i < offers.size(); i++) {
+            MerchantOffer offer = offers.get(i);
+            ItemStack result = offer.getResult();
+
+            if (result.getItem() == Items.DIAMOND_HOE) {
+                hasDiamondHoeOffer = true;
+                if (ruleValue >= 1 && (!result.isEnchanted() || ruleValue >= 2)) {
+                    ItemStack rerolled = edtp$createEnchantedTool(world, Items.DIAMOND_HOE, maxEnchantLevel);
                     offers.set(i, edtp$copyOffer(offer, rerolled));
+                    hasEnchantedDiamondHoe = true;
+                    continue;
                 }
+                hasEnchantedDiamondHoe = result.isEnchanted();
+            } else if (ruleValue >= 2 && edtp$isUpgradeableToolOffer(result)) {
+                ItemStack rerolled = edtp$createEnchantedTool(world, result.getItem(), maxEnchantLevel);
+                offers.set(i, edtp$copyOffer(offer, rerolled));
             }
         }
 
-        if (villagerData.level() >= 5 && !edtp$hasEnchantedDiamondHoe(offers)) {
-            int maxEnchantLevel = edtp$getMaxEnchantLevel(ruleValue);
+        if (!hasDiamondHoeOffer && villagerData.level() >= 5 && !hasEnchantedDiamondHoe) {
             offers.add(edtp$createOffer(world, Items.DIAMOND_HOE, 13, 3, 30, 0.2F, maxEnchantLevel));
         }
     }
@@ -69,17 +80,6 @@ public class SellEnchantedToolFactoryMixin {
             return 25;
         }
         return 19;
-    }
-
-    @Unique
-    private static boolean edtp$hasEnchantedDiamondHoe(MerchantOffers offers) {
-        for (MerchantOffer offer : offers) {
-            ItemStack result = offer.getResult();
-            if (result.getItem() == Items.DIAMOND_HOE && result.isEnchanted()) {
-                return true;
-            }
-        }
-        return false;
     }
 
     @Unique

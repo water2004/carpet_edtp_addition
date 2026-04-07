@@ -1,18 +1,15 @@
 package org.edtp.carpet_edtp_addition.mixin;
 
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import org.edtp.carpet_edtp_addition.CarpetEdtpAdditionSettings;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractFurnaceBlockEntity.class)
@@ -42,11 +39,9 @@ public class AbstractFurnaceBlockEntityMixin {
         cancellable = true
     )
     private static void allowPassthroughOutput(
-        RegistryAccess dynamicRegistryManager,
-        @Nullable RecipeHolder<?> recipe,
-        SingleRecipeInput input,
         NonNullList<ItemStack> inventory,
         int maxCount,
+        ItemStack resultStack,
         CallbackInfoReturnable<Boolean> cir
     ) {
         if (!CarpetEdtpAdditionSettings.noFurnaceAsh.value()) {
@@ -55,8 +50,8 @@ public class AbstractFurnaceBlockEntityMixin {
         
         ItemStack inputStack = inventory.get(0);
         
-        // 如果没有配方但有输入物品，检查是否可以直接输出
-        if (recipe == null && !inputStack.isEmpty()) {
+        // 如果没有产物但有输入物品，检查是否可以直接输出输入物品本身
+        if (resultStack.isEmpty() && !inputStack.isEmpty()) {
             ItemStack outputStack = inventory.get(2);
             
             // 输出槽为空，可以接受
@@ -90,31 +85,28 @@ public class AbstractFurnaceBlockEntityMixin {
         cancellable = true
     )
     private static void passthroughCraft(
-        RegistryAccess dynamicRegistryManager,
-        @Nullable RecipeHolder<?> recipe,
-        SingleRecipeInput input,
         NonNullList<ItemStack> inventory,
-        int maxCount,
-        CallbackInfoReturnable<Boolean> cir
+        ItemStack inputStack,
+        ItemStack resultStack,
+        CallbackInfo ci
     ) {
         if (!CarpetEdtpAdditionSettings.noFurnaceAsh.value()) {
             return;
         }
         
-        // 如果没有配方但有输入物品，直接原样输出
-        if (recipe == null && !inventory.get(0).isEmpty()) {
-            ItemStack inputStack = inventory.get(0);
+        // 如果没有产物但有输入物品，直接原样输出
+        if (resultStack.isEmpty() && !inventory.get(0).isEmpty()) {
             ItemStack outputStack = inventory.get(2);
             
-            // 计算最大堆叠数
-            int maxStackSize = Math.min(inputStack.getMaxStackSize(), maxCount);
+            // 直接沿用 vanilla canBurn 的堆叠上限判断
+            int maxStackSize = inputStack.getMaxStackSize();
             
             if (outputStack.isEmpty()) {
                 // 输出槽为空，尽可能多地输出
                 int transferCount = Math.min(inputStack.getCount(), maxStackSize);
                 inventory.set(2, inputStack.copyWithCount(transferCount));
                 inputStack.shrink(transferCount);
-                cir.setReturnValue(true);
+                ci.cancel();
                 return;
             } else if (ItemStack.isSameItemSameComponents(outputStack, inputStack)) {
                 // 输出槽有相同物品，尝试堆叠
@@ -124,13 +116,13 @@ public class AbstractFurnaceBlockEntityMixin {
                     int transferCount = Math.min(inputStack.getCount(), availableSpace);
                     outputStack.grow(transferCount);
                     inputStack.shrink(transferCount);
-                    cir.setReturnValue(true);
+                    ci.cancel();
                     return;
                 }
             }
             
-            // 无法输出
-            cir.setReturnValue(false);
+            // 无法输出时直接阻止 vanilla 继续处理
+            ci.cancel();
         }
     }
 }
