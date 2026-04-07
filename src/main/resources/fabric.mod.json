@@ -19,8 +19,8 @@
   ],
   "depends": {
     "fabricloader": ">=0.18.0",
-    "fabric": "*",
-    "minecraft": "${minecraft_version}",
-    "carpet": ">=1.4.193+v251211"
+    "fabric-api": "*",
+    "minecraft": ">=${minecraft_version}",
+    "carpet": ">=${carpet_version}"
   }
 }
