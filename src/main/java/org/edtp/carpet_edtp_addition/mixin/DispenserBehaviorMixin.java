@@ -1,22 +1,22 @@
 package org.edtp.carpet_edtp_addition.mixin;
 
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.dispenser.DispenserBehavior;
-import net.minecraft.item.Items;
+import net.minecraft.core.dispenser.DispenseItemBehavior;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.DispenserBlock;
 import org.edtp.carpet_edtp_addition.dispenser.CauldronBucketDispenserBehavior;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(DispenserBehavior.class)
+@Mixin(DispenseItemBehavior.class)
 public interface DispenserBehaviorMixin {
-    @Inject(method = "registerDefaults", at = @At("TAIL"))
+    @Inject(method = "bootStrap", at = @At("TAIL"))
     private static void registerCauldronBucketBehavior(CallbackInfo ci) {
-        DispenserBehavior waterFallback = DispenserBlock.BEHAVIORS.get(Items.WATER_BUCKET);
-        DispenserBehavior lavaFallback = DispenserBlock.BEHAVIORS.get(Items.LAVA_BUCKET);
-        DispenserBehavior powderSnowFallback = DispenserBlock.BEHAVIORS.get(Items.POWDER_SNOW_BUCKET);
-        DispenserBehavior emptyFallback = DispenserBlock.BEHAVIORS.get(Items.BUCKET);
+        DispenseItemBehavior waterFallback = DispenserBlock.DISPENSER_REGISTRY.get(Items.WATER_BUCKET);
+        DispenseItemBehavior lavaFallback = DispenserBlock.DISPENSER_REGISTRY.get(Items.LAVA_BUCKET);
+        DispenseItemBehavior powderSnowFallback = DispenserBlock.DISPENSER_REGISTRY.get(Items.POWDER_SNOW_BUCKET);
+        DispenseItemBehavior emptyFallback = DispenserBlock.DISPENSER_REGISTRY.get(Items.BUCKET);
 
         if (waterFallback != null) {
             DispenserBlock.registerBehavior(

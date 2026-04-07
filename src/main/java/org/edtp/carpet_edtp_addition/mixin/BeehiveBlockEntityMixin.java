@@ -1,9 +1,5 @@
 package org.edtp.carpet_edtp_addition.mixin;
 
-import net.minecraft.block.entity.BeehiveBlockEntity;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import org.edtp.carpet_edtp_addition.CarpetEdtpAdditionSettings;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,18 +9,22 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
 @Mixin(BeehiveBlockEntity.class)
 public class BeehiveBlockEntityMixin {
 
     // Targeting the mapped static method releaseBee with its descriptor so mixin can resolve it.
     @Inject(
-        method = "releaseBee(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;Lnet/minecraft/block/entity/BeehiveBlockEntity$BeeData;Ljava/util/List;Lnet/minecraft/block/entity/BeehiveBlockEntity$BeeState;Lnet/minecraft/util/math/BlockPos;)Z",
+        method = "releaseOccupant(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/entity/BeehiveBlockEntity$Occupant;Ljava/util/List;Lnet/minecraft/world/level/block/entity/BeehiveBlockEntity$BeeReleaseStatus;Lnet/minecraft/core/BlockPos;)Z",
         at = @At("HEAD"),
         cancellable = true
     )
     private static void preventReleaseInNetherEnd(
-        World world,
+        Level world,
         BlockPos pos,
         BlockState state,
         @Coerce Object beeData,

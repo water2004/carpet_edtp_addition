@@ -1,12 +1,12 @@
 package org.edtp.carpet_edtp_addition.mixin;
 
-import net.minecraft.entity.decoration.ArmorStandEntity;
+import net.minecraft.world.entity.decoration.ArmorStand;
 import org.edtp.carpet_edtp_addition.CarpetEdtpAdditionSettings;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.Constant;
 
-@Mixin(ArmorStandEntity.class)
+@Mixin(ArmorStand.class)
 public class ArmorStandEntityMixin {
     
     /**
@@ -15,7 +15,7 @@ public class ArmorStandEntityMixin {
      * 这样盔甲架只会播放击中音效,永远不会进入破坏逻辑
      */
     @ModifyConstant(
-        method = "damage",
+        method = "hurtServer",
         constant = @Constant(longValue = 5L)
     )
     private long modifyTimeThreshold(long original) {

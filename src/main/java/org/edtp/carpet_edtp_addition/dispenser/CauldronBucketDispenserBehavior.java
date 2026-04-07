@@ -1,24 +1,24 @@
 package org.edtp.carpet_edtp_addition.dispenser;
 
-import net.minecraft.block.AbstractCauldronBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.LeveledCauldronBlock;
-import net.minecraft.block.dispenser.DispenserBehavior;
-import net.minecraft.block.dispenser.ItemDispenserBehavior;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPointer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.dispenser.BlockSource;
+import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.core.dispenser.DispenseItemBehavior;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.AbstractCauldronBlock;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.block.LayeredCauldronBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import org.edtp.carpet_edtp_addition.CarpetEdtpAdditionSettings;
 
-public class CauldronBucketDispenserBehavior extends ItemDispenserBehavior {
+public class CauldronBucketDispenserBehavior extends DefaultDispenseItemBehavior {
     public enum Mode {
         WATER_BUCKET,
         LAVA_BUCKET,
@@ -26,17 +26,17 @@ public class CauldronBucketDispenserBehavior extends ItemDispenserBehavior {
         EMPTY_BUCKET
     }
 
-    private final DispenserBehavior fallback;
+    private final DispenseItemBehavior fallback;
     private final Mode mode;
     private boolean delegated;
 
-    public CauldronBucketDispenserBehavior(DispenserBehavior fallback, Mode mode) {
+    public CauldronBucketDispenserBehavior(DispenseItemBehavior fallback, Mode mode) {
         this.fallback = fallback;
         this.mode = mode;
     }
 
     @Override
-    protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
+    protected ItemStack execute(BlockSource pointer, ItemStack stack) {
         this.delegated = false;
         if (!CarpetEdtpAdditionSettings.dispenserFillsCauldron.value()) {
             this.delegated = true;
@@ -53,7 +53,7 @@ public class CauldronBucketDispenserBehavior extends ItemDispenserBehavior {
     }
 
     @Override
-    protected void playSound(BlockPointer pointer) {
+    protected void playSound(BlockSource pointer) {
         if (this.delegated) {
             return;
         }
@@ -61,17 +61,17 @@ public class CauldronBucketDispenserBehavior extends ItemDispenserBehavior {
     }
 
     @Override
-    protected void spawnParticles(BlockPointer pointer, net.minecraft.util.math.Direction side) {
+    protected void playAnimation(BlockSource pointer, net.minecraft.core.Direction side) {
         if (this.delegated) {
             this.delegated = false;
             return;
         }
-        super.spawnParticles(pointer, side);
+        super.playAnimation(pointer, side);
     }
 
-    private ItemStack tryHandleCauldron(BlockPointer pointer, ItemStack stack) {
-        World world = pointer.world();
-        BlockPos targetPos = pointer.pos().offset(pointer.state().get(DispenserBlock.FACING));
+    private ItemStack tryHandleCauldron(BlockSource pointer, ItemStack stack) {
+        Level world = pointer.level();
+        BlockPos targetPos = pointer.pos().relative(pointer.state().getValue(DispenserBlock.FACING));
         BlockState targetState = world.getBlockState(targetPos);
 
         switch (mode) {
@@ -91,17 +91,17 @@ public class CauldronBucketDispenserBehavior extends ItemDispenserBehavior {
                 }
             }
             case EMPTY_BUCKET -> {
-                if (targetState.isOf(Blocks.WATER_CAULDRON)) {
-                    int level = targetState.get(LeveledCauldronBlock.LEVEL);
+                if (targetState.is(Blocks.WATER_CAULDRON)) {
+                    int level = targetState.getValue(LayeredCauldronBlock.LEVEL);
                     if (level == 3) {
                         return drainWater(pointer, stack, targetPos);
                     }
-                } else if (targetState.isOf(Blocks.POWDER_SNOW_CAULDRON)) {
-                    int level = targetState.get(LeveledCauldronBlock.LEVEL);
+                } else if (targetState.is(Blocks.POWDER_SNOW_CAULDRON)) {
+                    int level = targetState.getValue(LayeredCauldronBlock.LEVEL);
                     if (level == 3) {
                         return drainPowderSnow(pointer, stack, targetPos);
                     }
-                } else if (targetState.isOf(Blocks.LAVA_CAULDRON)) {
+                } else if (targetState.is(Blocks.LAVA_CAULDRON)) {
                     return drainLava(pointer, stack, targetPos);
                 }
             }
@@ -112,58 +112,58 @@ public class CauldronBucketDispenserBehavior extends ItemDispenserBehavior {
         return null;
     }
 
-    private ItemStack fillWithWater(BlockPointer pointer, ItemStack stack, BlockPos pos) {
-        World world = pointer.world();
-        BlockState newState = Blocks.WATER_CAULDRON.getDefaultState().with(LeveledCauldronBlock.LEVEL, 3);
-        world.setBlockState(pos, newState);
-        playCauldronSound(world, pos, SoundEvents.ITEM_BUCKET_EMPTY);
-        world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
-        return this.decrementStackWithRemainder(pointer, stack, new ItemStack(Items.BUCKET));
+    private ItemStack fillWithWater(BlockSource pointer, ItemStack stack, BlockPos pos) {
+        Level world = pointer.level();
+        BlockState newState = Blocks.WATER_CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, 3);
+        world.setBlockAndUpdate(pos, newState);
+        playCauldronSound(world, pos, SoundEvents.BUCKET_EMPTY);
+        world.gameEvent(null, GameEvent.FLUID_PLACE, pos);
+        return this.consumeWithRemainder(pointer, stack, new ItemStack(Items.BUCKET));
     }
 
-    private ItemStack fillWithLava(BlockPointer pointer, ItemStack stack, BlockPos pos) {
-        World world = pointer.world();
-        BlockState newState = Blocks.LAVA_CAULDRON.getDefaultState();
-        world.setBlockState(pos, newState);
-        playCauldronSound(world, pos, SoundEvents.ITEM_BUCKET_EMPTY_LAVA);
-        world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
-        return this.decrementStackWithRemainder(pointer, stack, new ItemStack(Items.BUCKET));
+    private ItemStack fillWithLava(BlockSource pointer, ItemStack stack, BlockPos pos) {
+        Level world = pointer.level();
+        BlockState newState = Blocks.LAVA_CAULDRON.defaultBlockState();
+        world.setBlockAndUpdate(pos, newState);
+        playCauldronSound(world, pos, SoundEvents.BUCKET_EMPTY_LAVA);
+        world.gameEvent(null, GameEvent.FLUID_PLACE, pos);
+        return this.consumeWithRemainder(pointer, stack, new ItemStack(Items.BUCKET));
     }
 
-    private ItemStack fillWithPowderSnow(BlockPointer pointer, ItemStack stack, BlockPos pos) {
-        World world = pointer.world();
-        BlockState newState = Blocks.POWDER_SNOW_CAULDRON.getDefaultState().with(LeveledCauldronBlock.LEVEL, 3);
-        world.setBlockState(pos, newState);
-        playCauldronSound(world, pos, SoundEvents.ITEM_BUCKET_EMPTY_POWDER_SNOW);
-        world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
-        return this.decrementStackWithRemainder(pointer, stack, new ItemStack(Items.BUCKET));
+    private ItemStack fillWithPowderSnow(BlockSource pointer, ItemStack stack, BlockPos pos) {
+        Level world = pointer.level();
+        BlockState newState = Blocks.POWDER_SNOW_CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, 3);
+        world.setBlockAndUpdate(pos, newState);
+        playCauldronSound(world, pos, SoundEvents.BUCKET_EMPTY_POWDER_SNOW);
+        world.gameEvent(null, GameEvent.FLUID_PLACE, pos);
+        return this.consumeWithRemainder(pointer, stack, new ItemStack(Items.BUCKET));
     }
 
-    private ItemStack drainWater(BlockPointer pointer, ItemStack stack, BlockPos pos) {
-        World world = pointer.world();
-        world.setBlockState(pos, Blocks.CAULDRON.getDefaultState());
-        playCauldronSound(world, pos, SoundEvents.ITEM_BUCKET_FILL);
-        world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
-        return this.decrementStackWithRemainder(pointer, stack, new ItemStack(Items.WATER_BUCKET));
+    private ItemStack drainWater(BlockSource pointer, ItemStack stack, BlockPos pos) {
+        Level world = pointer.level();
+        world.setBlockAndUpdate(pos, Blocks.CAULDRON.defaultBlockState());
+        playCauldronSound(world, pos, SoundEvents.BUCKET_FILL);
+        world.gameEvent(null, GameEvent.FLUID_PICKUP, pos);
+        return this.consumeWithRemainder(pointer, stack, new ItemStack(Items.WATER_BUCKET));
     }
 
-    private ItemStack drainLava(BlockPointer pointer, ItemStack stack, BlockPos pos) {
-        World world = pointer.world();
-        world.setBlockState(pos, Blocks.CAULDRON.getDefaultState());
-        playCauldronSound(world, pos, SoundEvents.ITEM_BUCKET_FILL_LAVA);
-        world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
-        return this.decrementStackWithRemainder(pointer, stack, new ItemStack(Items.LAVA_BUCKET));
+    private ItemStack drainLava(BlockSource pointer, ItemStack stack, BlockPos pos) {
+        Level world = pointer.level();
+        world.setBlockAndUpdate(pos, Blocks.CAULDRON.defaultBlockState());
+        playCauldronSound(world, pos, SoundEvents.BUCKET_FILL_LAVA);
+        world.gameEvent(null, GameEvent.FLUID_PICKUP, pos);
+        return this.consumeWithRemainder(pointer, stack, new ItemStack(Items.LAVA_BUCKET));
     }
 
-    private ItemStack drainPowderSnow(BlockPointer pointer, ItemStack stack, BlockPos pos) {
-        World world = pointer.world();
-        world.setBlockState(pos, Blocks.CAULDRON.getDefaultState());
-        playCauldronSound(world, pos, SoundEvents.ITEM_BUCKET_FILL_POWDER_SNOW);
-        world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
-        return this.decrementStackWithRemainder(pointer, stack, new ItemStack(Items.POWDER_SNOW_BUCKET));
+    private ItemStack drainPowderSnow(BlockSource pointer, ItemStack stack, BlockPos pos) {
+        Level world = pointer.level();
+        world.setBlockAndUpdate(pos, Blocks.CAULDRON.defaultBlockState());
+        playCauldronSound(world, pos, SoundEvents.BUCKET_FILL_POWDER_SNOW);
+        world.gameEvent(null, GameEvent.FLUID_PICKUP, pos);
+        return this.consumeWithRemainder(pointer, stack, new ItemStack(Items.POWDER_SNOW_BUCKET));
     }
 
-    private void playCauldronSound(World world, BlockPos pos, SoundEvent sound) {
-        world.playSound(null, pos, sound, SoundCategory.BLOCKS, 1.0F, 1.0F);
+    private void playCauldronSound(Level world, BlockPos pos, SoundEvent sound) {
+        world.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 1.0F);
     }
 }

@@ -3,9 +3,6 @@ package org.edtp.carpet_edtp_addition;
 import carpet.api.settings.CarpetRule;
 import carpet.api.settings.SettingsManager;
 import carpet.CarpetServer;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.Text;
-import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.lang.reflect.Field;
@@ -13,6 +10,9 @@ import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.Level;
 
 public class CarpetEdtpAdditionSettings {
     private static final Logger LOGGER = LoggerFactory.getLogger("CarpetEdtpAddition");
@@ -117,7 +117,7 @@ public class CarpetEdtpAdditionSettings {
         }
     }
 
-    public static boolean isBeesDimCurfewEnabled(World world) {
+    public static boolean isBeesDimCurfewEnabled(Level world) {
         if (world == null) {
             return false;
         }
@@ -127,16 +127,16 @@ public class CarpetEdtpAdditionSettings {
         }
         String normalized = value.trim().toLowerCase(Locale.ROOT);
         if (normalized.equals("true") || normalized.equals("both")) {
-            return world.getRegistryKey() == World.NETHER || world.getRegistryKey() == World.END;
+            return world.dimension() == Level.NETHER || world.dimension() == Level.END;
         }
         if (normalized.equals("false")) {
             return false;
         }
         if (normalized.equals("nether") || normalized.equals("the_nether")) {
-            return world.getRegistryKey() == World.NETHER;
+            return world.dimension() == Level.NETHER;
         }
         if (normalized.equals("end") || normalized.equals("the_end")) {
-            return world.getRegistryKey() == World.END;
+            return world.dimension() == Level.END;
         }
         return false;
     }
@@ -158,7 +158,7 @@ public class CarpetEdtpAdditionSettings {
         }
         
         @Override
-        public List<Text> extraInfo() {
+        public List<Component> extraInfo() {
             return List.of();
         }
         
@@ -203,7 +203,7 @@ public class CarpetEdtpAdditionSettings {
         }
         
         @Override
-        public void set(ServerCommandSource source, String value) {
+        public void set(CommandSourceStack source, String value) {
             this.value = Boolean.parseBoolean(value);
             if (source != null) {
                 settingsManager().notifyRuleChanged(source, this, value);
@@ -211,7 +211,7 @@ public class CarpetEdtpAdditionSettings {
         }
         
         @Override
-        public void set(ServerCommandSource source, Boolean value) {
+        public void set(CommandSourceStack source, Boolean value) {
             this.value = value;
             if (source != null) {
                 settingsManager().notifyRuleChanged(source, this, value.toString());
@@ -241,7 +241,7 @@ public class CarpetEdtpAdditionSettings {
         }
 
         @Override
-        public List<Text> extraInfo() {
+        public List<Component> extraInfo() {
             return List.of();
         }
 
@@ -286,7 +286,7 @@ public class CarpetEdtpAdditionSettings {
         }
 
         @Override
-        public void set(ServerCommandSource source, String value) {
+        public void set(CommandSourceStack source, String value) {
             try {
                 this.value = Integer.parseInt(value);
                 if (source != null) {
@@ -295,7 +295,7 @@ public class CarpetEdtpAdditionSettings {
             } catch (NumberFormatException ignored) {}
         }
         
-        public void set(ServerCommandSource source, Integer value) {
+        public void set(CommandSourceStack source, Integer value) {
              this.value = value;
              if (source != null) {
                  settingsManager().notifyRuleChanged(source, this, value.toString());
@@ -325,7 +325,7 @@ public class CarpetEdtpAdditionSettings {
         }
 
         @Override
-        public List<Text> extraInfo() {
+        public List<Component> extraInfo() {
             return List.of();
         }
 
@@ -370,7 +370,7 @@ public class CarpetEdtpAdditionSettings {
         }
 
         @Override
-        public void set(ServerCommandSource source, String value) {
+        public void set(CommandSourceStack source, String value) {
             this.value = value;
             if (source != null) {
                 settingsManager().notifyRuleChanged(source, this, value);

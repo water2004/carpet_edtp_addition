@@ -1,11 +1,11 @@
 package org.edtp.carpet_edtp_addition.mixin;
 
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.RecipeEntry;
-import net.minecraft.recipe.input.SingleStackRecipeInput;
-import net.minecraft.registry.DynamicRegistryManager;
-import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import org.edtp.carpet_edtp_addition.CarpetEdtpAdditionSettings;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,7 +23,7 @@ public class AbstractFurnaceBlockEntityMixin {
      * 使得没有配方的物品只需要1tick即可输出
      */
     @ModifyConstant(
-        method = "getCookTime",
+        method = "getTotalCookTime",
         constant = @Constant(intValue = 200)
     )
     private static int modifyDefaultCookTime(int original) {
@@ -37,15 +37,15 @@ public class AbstractFurnaceBlockEntityMixin {
      * 修改 canAcceptRecipeOutput 方法，当没有配方但规则开启时，允许接受输出
      */
     @Inject(
-        method = "canAcceptRecipeOutput",
+        method = "canBurn",
         at = @At("HEAD"),
         cancellable = true
     )
     private static void allowPassthroughOutput(
-        DynamicRegistryManager dynamicRegistryManager,
-        @Nullable RecipeEntry<?> recipe,
-        SingleStackRecipeInput input,
-        DefaultedList<ItemStack> inventory,
+        RegistryAccess dynamicRegistryManager,
+        @Nullable RecipeHolder<?> recipe,
+        SingleRecipeInput input,
+        NonNullList<ItemStack> inventory,
         int maxCount,
         CallbackInfoReturnable<Boolean> cir
     ) {
@@ -66,9 +66,9 @@ public class AbstractFurnaceBlockEntityMixin {
             }
             
             // 输出槽有物品，检查是否可以堆叠
-            if (ItemStack.areItemsAndComponentsEqual(outputStack, inputStack)) {
+            if (ItemStack.isSameItemSameComponents(outputStack, inputStack)) {
                 // 计算可以添加的数量
-                int maxStackSize = Math.min(inputStack.getMaxCount(), maxCount);
+                int maxStackSize = Math.min(inputStack.getMaxStackSize(), maxCount);
                 // 如果输出槽还有空间，可以接受
                 if (outputStack.getCount() < maxStackSize) {
                     cir.setReturnValue(true);
@@ -85,15 +85,15 @@ public class AbstractFurnaceBlockEntityMixin {
      * 修改 craftRecipe 方法，当没有配方但规则开启时，直接输出原物品（尽可能多）
      */
     @Inject(
-        method = "craftRecipe",
+        method = "burn",
         at = @At("HEAD"),
         cancellable = true
     )
     private static void passthroughCraft(
-        DynamicRegistryManager dynamicRegistryManager,
-        @Nullable RecipeEntry<?> recipe,
-        SingleStackRecipeInput input,
-        DefaultedList<ItemStack> inventory,
+        RegistryAccess dynamicRegistryManager,
+        @Nullable RecipeHolder<?> recipe,
+        SingleRecipeInput input,
+        NonNullList<ItemStack> inventory,
         int maxCount,
         CallbackInfoReturnable<Boolean> cir
     ) {
@@ -107,23 +107,23 @@ public class AbstractFurnaceBlockEntityMixin {
             ItemStack outputStack = inventory.get(2);
             
             // 计算最大堆叠数
-            int maxStackSize = Math.min(inputStack.getMaxCount(), maxCount);
+            int maxStackSize = Math.min(inputStack.getMaxStackSize(), maxCount);
             
             if (outputStack.isEmpty()) {
                 // 输出槽为空，尽可能多地输出
                 int transferCount = Math.min(inputStack.getCount(), maxStackSize);
                 inventory.set(2, inputStack.copyWithCount(transferCount));
-                inputStack.decrement(transferCount);
+                inputStack.shrink(transferCount);
                 cir.setReturnValue(true);
                 return;
-            } else if (ItemStack.areItemsAndComponentsEqual(outputStack, inputStack)) {
+            } else if (ItemStack.isSameItemSameComponents(outputStack, inputStack)) {
                 // 输出槽有相同物品，尝试堆叠
                 int availableSpace = maxStackSize - outputStack.getCount();
                 if (availableSpace > 0) {
                     // 计算实际转移数量
                     int transferCount = Math.min(inputStack.getCount(), availableSpace);
-                    outputStack.increment(transferCount);
-                    inputStack.decrement(transferCount);
+                    outputStack.grow(transferCount);
+                    inputStack.shrink(transferCount);
                     cir.setReturnValue(true);
                     return;
                 }
