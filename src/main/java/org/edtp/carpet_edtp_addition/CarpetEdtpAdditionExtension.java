@@ -3,7 +3,7 @@ package org.edtp.carpet_edtp_addition;
 import carpet.CarpetExtension;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.entity.npc.villager.VillagerProfession;
-import net.minecraft.world.entity.npc.villager.VillagerTrades;
+import net.minecraft.world.item.trading.VillagerTrades;
 import net.minecraft.world.item.Items;
 import java.util.ArrayList;
 import java.util.Arrays;
