@@ -95,6 +95,12 @@ public class CarpetEdtpAdditionSettings {
         "Dispensers can fill/empty cauldrons with water/lava/powder snow buckets and empty buckets"
     );
 
+    public static final EdtpCarpetRule tntBreaksWithoutDrops = new EdtpCarpetRule(
+        "tntBreaksWithoutDrops",
+        false,
+        "TNT explosions break blocks without dropping any items"
+    );
+
     public static void register() {
         try {
             for (Field field : CarpetEdtpAdditionSettings.class.getDeclaredFields()) {
