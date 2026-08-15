@@ -101,6 +101,18 @@ public class CarpetEdtpAdditionSettings {
         "TNT explosions break blocks without dropping any items"
     );
 
+    public static final EdtpCarpetRule noMobFarmlandTrampling = new EdtpCarpetRule(
+        "noMobFarmlandTrampling",
+        false,
+        "Prevents non-player mobs from trampling farmland"
+    );
+
+    public static final EdtpCarpetRule featherFallingPreventsFarmlandTrampling = new EdtpCarpetRule(
+        "featherFallingPreventsFarmlandTrampling",
+        false,
+        "Players wearing Feather Falling boots cannot trample farmland"
+    );
+
     public static void register() {
         try {
             for (Field field : CarpetEdtpAdditionSettings.class.getDeclaredFields()) {

@@ -30,6 +30,8 @@
 | `villagerMaxEnchantLevel` | `0`     | 调节村民出售附魔工具的最高附魔等级                                   | `0` / `1` / `2` / `3` / `4`       |
 | `dispenserFillsCauldron`  | `false` | 发射器可以填充/取出炼药锅中的水/岩浆/细雪（和玩家的交互行为一样）    | `true` / `false`                        |
 | `tntBreaksWithoutDrops`   | `false` | TNT 爆炸破坏方块时不会掉落任何物品                                   | `true` / `false`                        |
+| `noMobFarmlandTrampling`  | `false` | 阻止玩家以外的生物踩踏并破坏耕地                                     | `true` / `false`                        |
+| `featherFallingPreventsFarmlandTrampling` | `false` | 穿着带有摔落保护附魔的靴子时，玩家不会踩坏耕地                     | `true` / `false`                        |
 
 ## 说明
 

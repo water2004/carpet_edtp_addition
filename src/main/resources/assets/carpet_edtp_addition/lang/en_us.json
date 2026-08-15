@@ -30,6 +30,10 @@
   "carpet.rule.dispenserFillsCauldron.desc": "Dispensers can fill/empty cauldrons with water/lava/powder snow buckets and empty buckets",
   "carpet.rule.tntBreaksWithoutDrops.name": "TNT Breaks Without Drops",
   "carpet.rule.tntBreaksWithoutDrops.desc": "TNT explosions break blocks without dropping any items",
+  "carpet.rule.noMobFarmlandTrampling.name": "No Mob Farmland Trampling",
+  "carpet.rule.noMobFarmlandTrampling.desc": "Prevents non-player mobs from trampling farmland",
+  "carpet.rule.featherFallingPreventsFarmlandTrampling.name": "Feather Falling Prevents Farmland Trampling",
+  "carpet.rule.featherFallingPreventsFarmlandTrampling.desc": "Players wearing Feather Falling boots cannot trample farmland",
   "item.bundle.insert.success": "Inserted %s × %s",
   "item.bundle.insert.fail": "Cannot insert %s (bundle is full)"
 }

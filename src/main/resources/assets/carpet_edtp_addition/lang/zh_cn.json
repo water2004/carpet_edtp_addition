@@ -30,6 +30,10 @@
   "carpet.rule.dispenserFillsCauldron.desc": "发射器可用水桶/岩浆桶/细雪桶/空桶填充或取出炼药锅",
   "carpet.rule.tntBreaksWithoutDrops.name": "TNT破坏方块不掉落物品",
   "carpet.rule.tntBreaksWithoutDrops.desc": "TNT爆炸破坏方块时不会掉落任何物品",
+  "carpet.rule.noMobFarmlandTrampling.name": "生物不会踩坏耕地",
+  "carpet.rule.noMobFarmlandTrampling.desc": "阻止玩家以外的生物踩踏并破坏耕地",
+  "carpet.rule.featherFallingPreventsFarmlandTrampling.name": "摔落保护防踩坏耕地",
+  "carpet.rule.featherFallingPreventsFarmlandTrampling.desc": "穿着带有摔落保护附魔的靴子时，玩家不会踩坏耕地",
   "item.bundle.insert.success": "已放入 %s × %s",
   "item.bundle.insert.fail": "无法放入 %s (收纳袋已满)"
 }

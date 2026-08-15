@@ -14,6 +14,7 @@
     "BundleContentsComponentMixin",
     "DispenserBehaviorMixin",
     "EntityAccessor",
+    "FarmlandBlockMixin",
     "LivingEntityMixin",
     "ShulkerBoxBlockEntityMixin",
     "ShulkerBoxSlotMixin",
