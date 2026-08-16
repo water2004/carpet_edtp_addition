@@ -29,7 +29,11 @@ public class BucketItemMixin {
     @SuppressWarnings("null")
     @Redirect(
         method = "use",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemUtils;createFilledResult(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/ItemStack;")
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/item/ItemUtils;createFilledResult(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/ItemStack;",
+            ordinal = 0
+        )
     )
     private ItemStack redirectExchangeStack(ItemStack itemStack, Player user, ItemStack replacement) {
         // 只在规则启用时执行检测
