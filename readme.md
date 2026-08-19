@@ -2,6 +2,20 @@
 
 为 Carpet Mod 提供一组简洁、实用的生存规则扩展。
 
+## 支持版本
+
+- Mod：`1.7`
+- Minecraft：`26.2`
+- Fabric Loader：`0.18.0` 或更高版本（构建使用 `0.19.3`）
+- Carpet：`26.2+v260616` 或更高版本
+
+## 1.7 更新
+
+- 新增 `tntBreaksWithoutDrops`，允许 TNT 爆炸破坏方块但不产生掉落物。
+- 新增 `noMobFarmlandTrampling`，阻止玩家以外的生物踩坏耕地。
+- 新增 `featherFallingPreventsFarmlandTrampling`，穿着摔落保护靴子的玩家不会踩坏耕地。
+- 修复 `resonantWater` 与 ViaFabricPlus 的 Mixin 冲突，功能行为保持不变。
+
 ## 使用方式
 
 - 查看规则：`/carpet`
