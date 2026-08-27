@@ -34,6 +34,8 @@
   "carpet.rule.noMobFarmlandTrampling.desc": "Prevents non-player mobs from trampling farmland",
   "carpet.rule.featherFallingPreventsFarmlandTrampling.name": "Feather Falling Prevents Farmland Trampling",
   "carpet.rule.featherFallingPreventsFarmlandTrampling.desc": "Players wearing Feather Falling boots cannot trample farmland",
+  "carpet.rule.snowlessDepths.name": "Snowless Depths",
+  "carpet.rule.snowlessDepths.desc": "Geothermal heat prevents snow layers from naturally forming or growing below Y=0",
   "item.bundle.insert.success": "Inserted %s × %s",
   "item.bundle.insert.fail": "Cannot insert %s (bundle is full)"
 }

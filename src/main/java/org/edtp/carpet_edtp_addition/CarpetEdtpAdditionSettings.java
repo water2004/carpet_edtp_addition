@@ -113,6 +113,12 @@ public class CarpetEdtpAdditionSettings {
         "Players wearing Feather Falling boots cannot trample farmland"
     );
 
+    public static final EdtpCarpetRule snowlessDepths = new EdtpCarpetRule(
+        "snowlessDepths",
+        false,
+        "Geothermal heat prevents natural snow accumulation below Y=0"
+    );
+
     public static void register() {
         try {
             for (Field field : CarpetEdtpAdditionSettings.class.getDeclaredFields()) {

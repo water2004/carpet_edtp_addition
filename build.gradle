@@ -25,6 +25,18 @@ fabricApi {
     configureDataGeneration {
         client = true
     }
+
+    configureTests {
+        createSourceSet = true
+        modId = "carpet_edtp_addition_gametest"
+        enableGameTests = true
+        enableClientGameTests = false
+        eula = true
+    }
+}
+
+loom.runs.named("gameTest") {
+    property "fabric-api.gametest.report-file", file("build/gametest-results.xml").absolutePath
 }
 
 repositories {

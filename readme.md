@@ -46,6 +46,7 @@
 | `tntBreaksWithoutDrops`   | `false` | TNT 爆炸破坏方块时不会掉落任何物品                                   | `true` / `false`                        |
 | `noMobFarmlandTrampling`  | `false` | 阻止玩家以外的生物踩踏并破坏耕地                                     | `true` / `false`                        |
 | `featherFallingPreventsFarmlandTrampling` | `false` | 穿着带有摔落保护附魔的靴子时，玩家不会踩坏耕地                     | `true` / `false`                        |
+| `snowlessDepths`          | `false` | 无雪深处：Y=0 以下无法自然生成或增厚雪层                              | `true` / `false`                        |
 
 ## 说明
 

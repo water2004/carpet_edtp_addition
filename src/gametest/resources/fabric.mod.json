@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "carpet_edtp_addition_gametest",
+  "version": "1.0.0",
+  "name": "Carpet EDTP Addition GameTests",
+  "environment": "server",
+  "entrypoints": {
+    "fabric-gametest": [
+      "org.edtp.carpet_edtp_addition.gametest.SnowlessDepthsGameTests"
+    ]
+  },
+  "depends": {
+    "fabricloader": "*",
+    "fabric-api": "*",
+    "minecraft": "*",
+    "carpet_edtp_addition": "*"
+  }
+}
