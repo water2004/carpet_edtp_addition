@@ -36,6 +36,8 @@
   "carpet.rule.featherFallingPreventsFarmlandTrampling.desc": "Players wearing Feather Falling boots cannot trample farmland",
   "carpet.rule.snowlessDepths.name": "Snowless Depths",
   "carpet.rule.snowlessDepths.desc": "Geothermal heat prevents snow layers from naturally forming or growing below Y=0",
+  "carpet.rule.noChickenJockeysOnMagmaBlocks.name": "No Chicken Jockeys On Magma Blocks",
+  "carpet.rule.noChickenJockeysOnMagmaBlocks.desc": "Prevents chicken jockeys from spawning on magma blocks",
   "item.bundle.insert.success": "Inserted %s × %s",
   "item.bundle.insert.fail": "Cannot insert %s (bundle is full)"
 }

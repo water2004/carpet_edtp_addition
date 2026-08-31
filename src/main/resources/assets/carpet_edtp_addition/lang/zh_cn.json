@@ -36,6 +36,8 @@
   "carpet.rule.featherFallingPreventsFarmlandTrampling.desc": "穿着带有摔落保护附魔的靴子时，玩家不会踩坏耕地",
   "carpet.rule.snowlessDepths.name": "无雪深处",
   "carpet.rule.snowlessDepths.desc": "Y=0 以下受地热影响，无法自然生成或增厚雪层",
+  "carpet.rule.noChickenJockeysOnMagmaBlocks.name": "禁止岩浆块鸡骑士",
+  "carpet.rule.noChickenJockeysOnMagmaBlocks.desc": "阻止鸡骑士在岩浆块上生成",
   "item.bundle.insert.success": "已放入 %s × %s",
   "item.bundle.insert.fail": "无法放入 %s (收纳袋已满)"
 }

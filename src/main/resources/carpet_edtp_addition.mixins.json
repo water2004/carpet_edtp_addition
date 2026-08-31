@@ -21,7 +21,8 @@
     "ShulkerBoxSlotMixin",
     "SellEnchantedToolFactoryMixin",
     "TeleportCommandMixin",
-    "TickCommandMixin"
+    "TickCommandMixin",
+    "ZombieMixin"
   ],
   "injectors": {
     "defaultRequire": 1

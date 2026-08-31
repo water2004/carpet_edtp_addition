@@ -119,6 +119,12 @@ public class CarpetEdtpAdditionSettings {
         "Geothermal heat prevents natural snow accumulation below Y=0"
     );
 
+    public static final EdtpCarpetRule noChickenJockeysOnMagmaBlocks = new EdtpCarpetRule(
+        "noChickenJockeysOnMagmaBlocks",
+        false,
+        "Prevents chicken jockeys from spawning on magma blocks"
+    );
+
     public static void register() {
         try {
             for (Field field : CarpetEdtpAdditionSettings.class.getDeclaredFields()) {
