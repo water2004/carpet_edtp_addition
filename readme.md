@@ -12,7 +12,11 @@
 ## 1.8 更新
 
 - 新增 `snowlessDepths`：Y=0 以下受地热影响，不会自然生成或增厚雪层。
+- 新增 `noChickenJockeysOnMagmaBlocks`，启用后阻止鸡骑士在岩浆块上生成，默认关闭。
+- 优化 `resonantWater` 的水桶注入：使用 `WrapOperation`，仅处理放置分支，保留 ViaFabricPlus 兼容性及其他模组的调用链，功能行为保持不变。
 - 添加 Fabric GameTest 与 CI 覆盖，验证寒冷群系降雪、Y=0 边界、Y<0 积雪限制、雪傀儡和细雪炼药锅行为。
+- 为 TNT 爆炸掉落处理补充非空参数注解，不改变规则行为。
+- 构建使用的 Fabric Loom 从 `1.15.4` 升级至 `1.16.3`。
 
 ## 1.7 更新
 
@@ -52,6 +56,7 @@
 | `noMobFarmlandTrampling`  | `false` | 阻止玩家以外的生物踩踏并破坏耕地                                     | `true` / `false`                        |
 | `featherFallingPreventsFarmlandTrampling` | `false` | 穿着带有摔落保护附魔的靴子时，玩家不会踩坏耕地                     | `true` / `false`                        |
 | `snowlessDepths`          | `false` | 无雪深处：Y=0 以下无法自然生成或增厚雪层                              | `true` / `false`                        |
+| `noChickenJockeysOnMagmaBlocks` | `false` | 阻止鸡骑士在岩浆块上生成                                      | `true` / `false`                        |
 
 ## 说明
 
