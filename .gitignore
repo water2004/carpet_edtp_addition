@@ -10,3 +10,4 @@ libs/
 client.jar
 *.log
 *.tmp
+logs/
