@@ -142,6 +142,14 @@ public class CarpetEdtpAdditionSettings {
                     }
                 }
             }
+            CarpetServer.settingsManager.registerRuleObserver((source, rule, value) -> {
+                if (source == null || rule != tickCommandForAll) {
+                    return;
+                }
+
+                var server = source.getServer();
+                server.getPlayerList().getPlayers().forEach(server.getCommands()::sendCommands);
+            });
         } catch (IllegalAccessException e) {
             throw new RuntimeException("Failed to register Carpet rules via reflection", e);
         }
