@@ -5,6 +5,7 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.edtp.carpet_edtp_addition.CarpetEdtpAdditionSettings;
+import org.jspecify.annotations.NonNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -16,7 +17,7 @@ public abstract class BlockBehaviourMixin {
         method = "onExplosionHit",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/Block;dropFromExplosion(Lnet/minecraft/world/level/Explosion;)Z")
     )
-    private boolean redirectDropFromExplosion(Block block, Explosion explosion) {
+    private boolean redirectDropFromExplosion(Block block, @NonNull Explosion explosion) {
         if (CarpetEdtpAdditionSettings.tntBreaksWithoutDrops.value()
             && explosion.getDirectSourceEntity() instanceof PrimedTnt) {
             return false;
