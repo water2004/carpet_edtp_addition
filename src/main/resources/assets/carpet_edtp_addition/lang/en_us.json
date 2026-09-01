@@ -38,6 +38,8 @@
   "carpet.rule.snowlessDepths.desc": "Geothermal heat prevents snow layers from naturally forming or growing below Y=0",
   "carpet.rule.noChickenJockeysOnMagmaBlocks.name": "No Chicken Jockeys On Magma Blocks",
   "carpet.rule.noChickenJockeysOnMagmaBlocks.desc": "Prevents chicken jockeys from spawning on magma blocks",
+  "carpet.rule.naturalSkeletonTraps.name": "Natural Skeleton Traps",
+  "carpet.rule.naturalSkeletonTraps.desc": "Lightning-generated skeleton traps require a valid natural spawn position",
   "item.bundle.insert.success": "Inserted %s × %s",
   "item.bundle.insert.fail": "Cannot insert %s (bundle is full)"
 }

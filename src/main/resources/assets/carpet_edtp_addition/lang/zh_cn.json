@@ -38,6 +38,8 @@
   "carpet.rule.snowlessDepths.desc": "Y=0 以下受地热影响，无法自然生成或增厚雪层",
   "carpet.rule.noChickenJockeysOnMagmaBlocks.name": "禁止岩浆块鸡骑士",
   "carpet.rule.noChickenJockeysOnMagmaBlocks.desc": "阻止鸡骑士在岩浆块上生成",
+  "carpet.rule.naturalSkeletonTraps.name": "自然骷髅陷阱",
+  "carpet.rule.naturalSkeletonTraps.desc": "雷击生成的陷阱骷髅马必须处于合法的自然出生位置",
   "item.bundle.insert.success": "已放入 %s × %s",
   "item.bundle.insert.fail": "无法放入 %s (收纳袋已满)"
 }

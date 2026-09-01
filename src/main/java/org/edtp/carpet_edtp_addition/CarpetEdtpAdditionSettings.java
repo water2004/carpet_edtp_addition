@@ -125,6 +125,12 @@ public class CarpetEdtpAdditionSettings {
         "Prevents chicken jockeys from spawning on magma blocks"
     );
 
+    public static final EdtpCarpetRule naturalSkeletonTraps = new EdtpCarpetRule(
+        "naturalSkeletonTraps",
+        false,
+        "Lightning-generated skeleton traps require a valid natural spawn position"
+    );
+
     public static void register() {
         try {
             for (Field field : CarpetEdtpAdditionSettings.class.getDeclaredFields()) {

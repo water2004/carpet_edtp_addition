@@ -7,6 +7,7 @@
   "entrypoints": {
     "fabric-gametest": [
       "org.edtp.carpet_edtp_addition.gametest.SnowlessDepthsGameTests",
+      "org.edtp.carpet_edtp_addition.gametest.NaturalSkeletonTrapsGameTests",
       "org.edtp.carpet_edtp_addition.gametest.TickCommandForAllGameTests"
     ]
   },
