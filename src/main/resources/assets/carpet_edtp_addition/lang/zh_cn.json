@@ -40,6 +40,8 @@
   "carpet.rule.noChickenJockeysOnMagmaBlocks.desc": "阻止鸡骑士在岩浆块上生成",
   "carpet.rule.naturalSkeletonTraps.name": "自然骷髅陷阱",
   "carpet.rule.naturalSkeletonTraps.desc": "雷击生成的陷阱骷髅马必须处于合法的自然出生位置",
+  "carpet.rule.soundSuppressionReintroduced.name": "重新引入声音抑制",
+  "carpet.rule.soundSuppressionReintroduced.desc": "重新引入 Minecraft 1.21 的声音抑制器，允许受抑制的幽匿感测体方块实体交换并保留",
   "item.bundle.insert.success": "已放入 %s × %s",
   "item.bundle.insert.fail": "无法放入 %s (收纳袋已满)"
 }

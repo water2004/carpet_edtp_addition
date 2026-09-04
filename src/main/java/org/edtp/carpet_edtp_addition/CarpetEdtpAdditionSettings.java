@@ -131,6 +131,12 @@ public class CarpetEdtpAdditionSettings {
         "Lightning-generated skeleton traps require a valid natural spawn position"
     );
 
+    public static final EdtpCarpetRule soundSuppressionReintroduced = new EdtpCarpetRule(
+        "soundSuppressionReintroduced",
+        false,
+        "Reintroduces Minecraft 1.21 sound suppression by preserving suppressed sculk sensor block entity swaps"
+    );
+
     public static void register() {
         try {
             for (Field field : CarpetEdtpAdditionSettings.class.getDeclaredFields()) {

@@ -40,6 +40,8 @@
   "carpet.rule.noChickenJockeysOnMagmaBlocks.desc": "Prevents chicken jockeys from spawning on magma blocks",
   "carpet.rule.naturalSkeletonTraps.name": "Natural Skeleton Traps",
   "carpet.rule.naturalSkeletonTraps.desc": "Lightning-generated skeleton traps require a valid natural spawn position",
+  "carpet.rule.soundSuppressionReintroduced.name": "Sound Suppression Reintroduced",
+  "carpet.rule.soundSuppressionReintroduced.desc": "Reintroduces Minecraft 1.21 sound suppressors by preserving suppressed sculk sensor block entity swaps",
   "item.bundle.insert.success": "Inserted %s × %s",
   "item.bundle.insert.fail": "Cannot insert %s (bundle is full)"
 }
