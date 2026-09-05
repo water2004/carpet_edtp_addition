@@ -4,9 +4,8 @@ import com.mojang.serialization.DataResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.component.BundleContents;
-import net.minecraft.world.level.block.ShulkerBoxBlock;
 import org.apache.commons.lang3.math.Fraction;
-import org.edtp.carpet_edtp_addition.CarpetEdtpAdditionSettings;
+import org.edtp.carpet_edtp_addition.bundle.StrongerBundlePolicy;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,15 +19,8 @@ public class BundleContentsComponentMixin {
      */
     @Inject(method = "canItemBeInBundle", at = @At("HEAD"), cancellable = true)
     private static void allowShulkerBoxes(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        if (CarpetEdtpAdditionSettings.strongerBundle.value()) {
-            // 如果是潜影盒,允许放入
-            if (stack.getItem() instanceof net.minecraft.world.item.BlockItem blockItem) {
-                if (blockItem.getBlock() instanceof ShulkerBoxBlock) {
-                    if (!stack.isEmpty()) {
-                        cir.setReturnValue(true);
-                    }
-                }
-            }
+        if (StrongerBundlePolicy.allowsInBundle(stack)) {
+            cir.setReturnValue(true);
         }
     }
     
@@ -41,13 +33,8 @@ public class BundleContentsComponentMixin {
         ItemInstance stack,
         CallbackInfoReturnable<DataResult<Fraction>> cir
     ) {
-        if (CarpetEdtpAdditionSettings.strongerBundle.value()) {
-            if (stack.typeHolder().value() instanceof net.minecraft.world.item.BlockItem blockItem) {
-                if (blockItem.getBlock() instanceof ShulkerBoxBlock) {
-                    // 设置潜影盒占用 1/8 空间,所以最多可以放 8 个
-                    cir.setReturnValue(DataResult.success(Fraction.getFraction(1, 8)));
-                }
-            }
+        if (StrongerBundlePolicy.usesShulkerBoxWeight(stack)) {
+            cir.setReturnValue(DataResult.success(Fraction.getFraction(1, 8)));
         }
     }
 }
