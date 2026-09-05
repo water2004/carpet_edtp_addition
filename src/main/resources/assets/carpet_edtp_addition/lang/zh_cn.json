@@ -42,6 +42,8 @@
   "carpet.rule.naturalSkeletonTraps.desc": "雷击生成的陷阱骷髅马必须处于合法的自然出生位置",
   "carpet.rule.soundSuppressionReintroduced.name": "重新引入声音抑制",
   "carpet.rule.soundSuppressionReintroduced.desc": "重新引入 Minecraft 1.21 的声音抑制器，允许受抑制的幽匿感测体方块实体交换并保留",
+  "carpet.rule.staggeredBeacons.name": "信标错峰",
+  "carpet.rule.staggeredBeacons.desc": "按坐标错开服务端信标的底座检查、效果刷新和环境音时刻，仍每 80 tick 执行一次，不改变效果时长、范围和光柱扫描",
   "item.bundle.insert.success": "已放入 %s × %s",
   "item.bundle.insert.fail": "无法放入 %s (收纳袋已满)"
 }

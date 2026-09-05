@@ -42,6 +42,8 @@
   "carpet.rule.naturalSkeletonTraps.desc": "Lightning-generated skeleton traps require a valid natural spawn position",
   "carpet.rule.soundSuppressionReintroduced.name": "Sound Suppression Reintroduced",
   "carpet.rule.soundSuppressionReintroduced.desc": "Reintroduces Minecraft 1.21 sound suppressors by preserving suppressed sculk sensor block entity swaps",
+  "carpet.rule.staggeredBeacons.name": "Staggered Beacons",
+  "carpet.rule.staggeredBeacons.desc": "Spreads server-side beacon base checks, effect refreshes and ambient sounds across their 80-tick cycle using position-based offsets; effect duration, range and beam scanning are unchanged",
   "item.bundle.insert.success": "Inserted %s × %s",
   "item.bundle.insert.fail": "Cannot insert %s (bundle is full)"
 }

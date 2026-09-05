@@ -137,6 +137,12 @@ public class CarpetEdtpAdditionSettings {
         "Reintroduces Minecraft 1.21 sound suppression by preserving suppressed sculk sensor block entity swaps"
     );
 
+    public static final EdtpCarpetRule staggeredBeacons = new EdtpCarpetRule(
+        "staggeredBeacons",
+        false,
+        "Spreads beacon base checks and effect refreshes across their 80-tick cycle using position-based offsets"
+    );
+
     public static void register() {
         try {
             for (Field field : CarpetEdtpAdditionSettings.class.getDeclaredFields()) {
