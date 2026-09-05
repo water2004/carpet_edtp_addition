@@ -233,6 +233,11 @@ public class SoundSuppressionReintroducedGameTests {
     }
 
     private static void clear(ServerLevel level, BlockPos pos) {
+        if (level.getBlockEntity(pos) instanceof SculkSensorBlockEntity sensor) {
+            // Test teardown must unregister the listener retained during the block entity swap.
+            sensor.setBlockState((sensor instanceof CalibratedSculkSensorBlockEntity
+                ? Blocks.CALIBRATED_SCULK_SENSOR : Blocks.SCULK_SENSOR).defaultBlockState());
+        }
         level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
     }
 }
