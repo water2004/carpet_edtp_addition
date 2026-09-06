@@ -15,6 +15,7 @@
     "BlockBehaviourMixin",
     "BucketItemMixin",
     "BundleContentsComponentMixin",
+    "ChunkDeleteLightFixMixin",
     "DispenserBehaviorMixin",
     "EntityAccessor",
     "FarmlandBlockMixin",

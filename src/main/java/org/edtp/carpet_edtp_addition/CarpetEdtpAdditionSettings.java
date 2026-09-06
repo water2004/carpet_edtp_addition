@@ -143,6 +143,12 @@ public class CarpetEdtpAdditionSettings {
         "Spreads beacon base checks and effect refreshes across their 80-tick cycle using position-based offsets"
     );
 
+    public static final EdtpCarpetRule preserveLightOnUpgrade = new EdtpCarpetRule(
+        "preserveLightOnUpgrade",
+        false,
+        "Preserves valid saved lighting when version upgrades would otherwise delete the light cache"
+    );
+
     public static void register() {
         try {
             for (Field field : CarpetEdtpAdditionSettings.class.getDeclaredFields()) {

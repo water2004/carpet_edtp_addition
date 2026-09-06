@@ -44,9 +44,16 @@
 | `naturalSkeletonTraps` | `false` | 雷击生成的陷阱骷髅马必须位于合法的自然出生位置 | `true` / `false` | `1.9+` |
 | `soundSuppressionReintroduced` | `false` | 重新引入 Minecraft 1.21 的声音抑制器相关行为 | `true` / `false` | `1.9+` |
 | `staggeredBeacons` | `false` | 信标按坐标错峰检查底座、刷新效果，减少集中在同一 tick 的工作量 | `true` / `false` | `1.9+` |
+| `preserveLightOnUpgrade` | `false` | 版本升级时保留已标记有效的光照缓存，不影响正常光照更新和主动清除缓存 | `true` / `false` | 未发布 |
 
 ## 说明
 
+- `preserveLightOnUpgrade`（升级保留光照）：
+
+  - 需在旧区块升级前启用；首次用新版打开存档前，可在存档的 `carpet.conf` 中加入 `preserveLightOnUpgrade true`。
+  - 用于游戏正常加载旧区块。不要先运行“优化世界”或 `--forceUpgrade`：离线升级发生在 Carpet 加载存档规则之前，不受此配置保护。
+  - 仅跳过升级过程中专门清除光照缓存的修复，不强行修复无效标记，不拦截世界高度迁移或“清除缓存数据”；正常光照更新仍会发生。
+  - 旧光照错误也会被保留，不能保证兼容所有跨版本光照变化。请备份存档；关闭规则不会自动重算已经升级的区块。
 - `soundSuppressionReintroduced`（重新引入声音抑制）：
 
   - 允许受更新抑制影响的幽匿感测体方块实体交换并保留，恢复 Minecraft 1.21 的相关声音抑制行为。
