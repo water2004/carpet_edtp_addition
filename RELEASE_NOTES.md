@@ -1,4 +1,4 @@
-# 1.9 (Minecraft 26.2)
+# 1.10 (Minecraft 26.2)
 
 ## 更新内容
 
@@ -6,25 +6,19 @@
 
 - 添加规则：
 
-1. `naturalSkeletonTraps`：雷击生成的陷阱骷髅马必须通过自然出生位置和碰撞检查，避免在不允许自然刷怪的位置生成。
-2. `soundSuppressionReintroduced`：重新引入 Minecraft 1.21 的声音抑制器相关行为，允许受更新抑制影响的幽匿感测体方块实体交换并保留。
-3. `staggeredBeacons`：按坐标错开信标的底座检查、效果刷新和环境音时刻，减少大量信标在同一 tick 集中工作的峰值。
+1. `preserveLightOnUpgrade`：版本升级时保留旧区块中已标记有效的光照缓存，避免升级修复主动清除已有光照数据，默认关闭。
 
-新增规则均默认关闭。
+- 关于 `preserveLightOnUpgrade` 的附加说明：
 
-- 关于 `soundSuppressionReintroduced` 的附加说明：
-
-> 支持讲台、蜂巢和潜影盒等对应声音抑制装置，但规则本身不提供更新抑制器。声音抑制通过异常中断事件处理；玩家操作数据包中的异常可以被原版拦截，其他触发路径仍可能导致服务器崩溃，使用前请备份存档。
-
-- 关于 `staggeredBeacons` 的附加说明：
-
-> 仍然每 80 tick 执行一次，不改变效果等级、范围、持续时间或逐 tick 的光柱扫描。规则减少集中工作峰值，不减少总扫描次数；切换规则会改变刷新时序。
+> 1. 需在旧区块升级前启用。首次用新版打开存档前，在存档的 `carpet.conf` 中加入 `preserveLightOnUpgrade true`，然后正常加载游戏。
+> 2. 不要先运行“优化世界”或 `--forceUpgrade`：离线升级发生在 Carpet 加载存档规则之前，不受此配置保护。
+> 3. 不会将无效光照强制标记为有效；世界高度迁移、主动清除缓存以及正常光照更新仍遵循原版逻辑。
+> 4. 旧光照错误也会被保留，不能保证兼容所有跨版本光照变化。使用前请备份存档；关闭规则不会自动重算已经升级的区块，也不能恢复已经删除的光照缓存。
 
 ### 其他改进：
 
-- 整理村民交易、收纳袋、安全传送和水桶规则的代码，将主要逻辑与 Mixin 分离，保持既有规则行为。
-- 补充 Fabric GameTest，覆盖陷阱骷髅马生成检查、声音抑制、玩家放置数据包异常处理，以及信标错峰。
-- 添加标签触发的自动发布流程，构建和 GameTest 通过后，使用根目录的发布说明创建 GitHub Release，并上传模组和源码 JAR。
+- 新增 6 项 Fabric GameTest，覆盖两次光照清除升级、缓存转换器中的规则切换、无效标记、完整升级与序列化、世界高度迁移、主动清除缓存，以及服务端正常光照传播和消退。
+- README 规则列表使用 Mod 版本范围标注规则可用版本，移除独立更新日志。
 
 ---
 
@@ -32,24 +26,18 @@
 
 ### What's New:
 
-- Added rules:
+- Added rule:
 
-1. `naturalSkeletonTraps`: Requires lightning-generated skeleton traps to pass natural spawn-position and collision checks, preventing them from appearing at invalid natural spawn positions.
-2. `soundSuppressionReintroduced`: Reintroduces Minecraft 1.21 sound-suppressor behavior by preserving sculk sensor block entity swaps caused by update suppression.
-3. `staggeredBeacons`: Distributes beacon base checks, effect refreshes, and ambient sounds across different ticks using position-based offsets, reducing spikes caused by many beacons updating together.
+1. `preserveLightOnUpgrade`: Preserves light caches marked valid in old chunks when upgrading game versions, preventing upgrade fixes from deleting existing lighting data. Disabled by default.
 
-All new rules are disabled by default.
+- Additional notes about `preserveLightOnUpgrade`:
 
-- Additional notes about `soundSuppressionReintroduced`:
-
-> Supports corresponding sound suppressors using lecterns, bee nests, and shulker boxes. The rule does not provide an update suppressor itself. Sound suppression interrupts event processing through exceptions: vanilla can catch exceptions during player interaction packet handling, but other trigger paths may still crash the server. Back up your world before use.
-
-- Additional notes about `staggeredBeacons`:
-
-> Each beacon still updates every 80 ticks. Effect levels, range, duration, and per-tick beam scanning remain unchanged. The rule spreads workload peaks without reducing the total number of scans; toggling it changes the update schedule.
+> 1. Enable the rule before old chunks are upgraded. Before opening the world in the newer version for the first time, add `preserveLightOnUpgrade true` to the world's `carpet.conf`, then load the game normally.
+> 2. Do not run Optimize World or `--forceUpgrade` first: offline upgrades run before Carpet loads the world's rule configuration and are not protected by this setting.
+> 3. Invalid lighting is not forcibly marked valid. World-height migration, explicit cache erasure, and normal light updates retain vanilla behavior.
+> 4. Existing lighting errors are preserved too; compatibility with every cross-version lighting change is not guaranteed. Back up your world first. Disabling the rule does not automatically relight already upgraded chunks or restore deleted light caches.
 
 ### Other Improvements:
 
-- Separated the main logic of villager trades, bundles, safe teleportation, and bucket rules from their Mixins while preserving existing behavior.
-- Expanded Fabric GameTest coverage for skeleton trap spawn checks, sound suppression, player placement packet error handling, and staggered beacon updates.
-- Added tag-triggered automated releases. After the build and GameTests pass, the workflow publishes a GitHub Release using the release notes in the repository root and uploads the mod and sources JARs.
+- Added six Fabric GameTests covering both light-deletion upgrades, rule changes with cached converters, invalid markers, full upgrades and serialization, world-height migration, explicit cache erasure, and normal server-side light propagation and removal.
+- Replaced the standalone README changelog with Mod version ranges in the rule table.

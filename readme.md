@@ -4,7 +4,7 @@
 
 ## 支持版本
 
-- Mod：`1.9`
+- Mod：`1.10`
 - Minecraft：`26.2`
 - Fabric Loader：`0.18.0` 或更高版本（构建使用 `0.19.3`）
 - Carpet：`26.2+v260616` 或更高版本
@@ -44,7 +44,7 @@
 | `naturalSkeletonTraps` | `false` | 雷击生成的陷阱骷髅马必须位于合法的自然出生位置 | `true` / `false` | `1.9+` |
 | `soundSuppressionReintroduced` | `false` | 重新引入 Minecraft 1.21 的声音抑制器相关行为 | `true` / `false` | `1.9+` |
 | `staggeredBeacons` | `false` | 信标按坐标错峰检查底座、刷新效果，减少集中在同一 tick 的工作量 | `true` / `false` | `1.9+` |
-| `preserveLightOnUpgrade` | `false` | 版本升级时保留已标记有效的光照缓存，不影响正常光照更新和主动清除缓存 | `true` / `false` | 未发布 |
+| `preserveLightOnUpgrade` | `false` | 版本升级时保留已标记有效的光照缓存，不影响正常光照更新和主动清除缓存 | `true` / `false` | `1.10+` |
 
 ## 说明
 
@@ -83,6 +83,6 @@
 
 - 普通 `main` 推送和 Pull Request 运行 CI，不会创建 Release。
 - 发布前更新 `gradle.properties` 的 `mod_version` 和根目录 `RELEASE_NOTES.md`；发布说明的首行使用 `# <Mod 版本> (Minecraft <游戏版本>)`。
-- 将发布提交推送到 `main`，再推送格式为 `v<Mod 版本>-<游戏版本>` 的标签，例如 `v1.9-26.2`。
+- 将发布提交推送到 `main`，再推送格式为 `v<Mod 版本>-<游戏版本>` 的标签，例如 `v1.10-26.2`。
 - CD 会检查标签与版本配置一致、标签提交属于 `main`、发布说明版本匹配；构建及 Fabric GameTest 全部通过后，使用该标签提交中的 `RELEASE_NOTES.md` 发布 GitHub Release，并上传模组和源码 JAR。
 - 发布使用 GitHub Actions 自带的 `GITHUB_TOKEN`，不需要额外配置发布密钥；失败时不会发布，已有 Release 不会被覆盖。
