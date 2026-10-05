@@ -45,8 +45,17 @@
 | `soundSuppressionReintroduced` | `false` | 重新引入 Minecraft 1.21 的声音抑制器相关行为 | `true` / `false` | `1.9+` |
 | `staggeredBeacons` | `false` | 信标按坐标错峰检查底座、刷新效果，减少集中在同一 tick 的工作量 | `true` / `false` | `1.9+` |
 | `preserveLightOnUpgrade` | `false` | 版本升级时保留已标记有效的光照缓存，不影响正常光照更新和主动清除缓存 | `true` / `false` | `1.10+` |
+| `fakePlayerConnectionLifecycle` | `false` | 补全假人下线与关服时的 Fabric 连接事件和网络会话清理 | `true` / `false` | 待发布 |
 
 ## 说明
+
+- `fakePlayerConnectionLifecycle`（假人连接生命周期，默认 `false`）：
+
+  - 使用 `/carpet fakePlayerConnectionLifecycle true` 启用，补全假人离线与服务器关闭时的 Fabric `DISCONNECT` 事件和网络会话清理，适用于 BlueMap 等依赖下线事件的模组。
+  - 当前支持版本的 Fabric API 已通过现有网络对象触发 `INIT` 和 `JOIN`；此规则复用同一网络对象完成下线，不重复补发上线事件。
+  - 开启时建立的假人连接，即使之后关闭规则，也会完成下线清理；开启规则也可清理此前上线、随后退出的假人，但不会重放已经错过的事件。
+  - 按连接去重，支持影子假人与同 UUID 玩家替换；不改变假人 tick 或动作包阶段，可与 Carpet TIS Addition 的 `fakePlayerTicksLikeRealPlayer` 配合使用。
+  - 假人仍没有真实客户端，此规则不模拟客户端握手。下线监听器异常会记录日志并完成会话清理，但不能保证异常之后的其他监听器继续执行。
 
 - `preserveLightOnUpgrade`（升级保留光照）：
 
@@ -78,6 +87,12 @@
     - **填充内容物**：用水桶/岩浆桶/细雪桶向炼药锅发射，将炼药锅填满对应内容物，并返回空桶（和玩家交互逻辑相同）
     - **取出内容物**：用空桶向含有内容物（水/岩浆/细雪）的炼药锅发射，将内容物吸入桶中
   - 使用场景：自动化液体处理系统
+
+## 开发验证
+
+- 基础检查：`./gradlew build -x runGameTest` 和 `./gradlew runGameTest`。
+- TIS 集成检查：下载对应 Minecraft 版本的 Carpet TIS Addition JAR，再运行 `./gradlew runGameTest -PtisCompatibilityJar=<JAR绝对路径>`。该依赖仅加载到 GameTest 运行环境，不打包进发布 JAR。
+- 生命周期测试检查真实 Fabric 事件次数、sender 与会话清理，并覆盖规则开关、监听器异常、重生、重复登录、影子假人、关服以及 TIS tick 规则的开关与切换。
 
 ## 发布流程
 
