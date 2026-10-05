@@ -149,6 +149,12 @@ public class CarpetEdtpAdditionSettings {
         "Preserves valid saved lighting when version upgrades would otherwise delete the light cache"
     );
 
+    public static final EdtpCarpetRule fakePlayerConnectionLifecycle = new EdtpCarpetRule(
+        "fakePlayerConnectionLifecycle",
+        false,
+        "Completes Fabric disconnect events and network session cleanup for Carpet fake players"
+    );
+
     public static void register() {
         try {
             for (Field field : CarpetEdtpAdditionSettings.class.getDeclaredFields()) {

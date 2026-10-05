@@ -46,6 +46,8 @@
   "carpet.rule.staggeredBeacons.desc": "Spreads server-side beacon base checks, effect refreshes and ambient sounds across their 80-tick cycle using position-based offsets; effect duration, range and beam scanning are unchanged",
   "carpet.rule.preserveLightOnUpgrade.name": "Preserve Light On Upgrade",
   "carpet.rule.preserveLightOnUpgrade.desc": "Preserves light caches marked valid during version upgrades; normal lighting, height migration and explicit cache erasure are unchanged",
+  "carpet.rule.fakePlayerConnectionLifecycle.name": "Fake Player Connection Lifecycle",
+  "carpet.rule.fakePlayerConnectionLifecycle.desc": "Completes Fabric disconnect events and network session cleanup for Carpet fake players; existing INIT/JOIN events and player tick scheduling are preserved",
   "item.bundle.insert.success": "Inserted %s × %s",
   "item.bundle.insert.fail": "Cannot insert %s (bundle is full)"
 }
