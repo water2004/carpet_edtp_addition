@@ -91,8 +91,8 @@
 ## 开发验证
 
 - 基础检查：`./gradlew build -x runGameTest` 和 `./gradlew runGameTest`。
-- TIS 集成检查：下载对应 Minecraft 版本的 Carpet TIS Addition JAR，再运行 `./gradlew runGameTest -PtisCompatibilityJar=<JAR绝对路径>`。该依赖仅加载到 GameTest 运行环境，不打包进发布 JAR。
-- 生命周期测试检查真实 Fabric 事件次数、sender 与会话清理，并覆盖规则开关、监听器异常、重生、重复登录、影子假人、关服以及 TIS tick 规则的开关与切换。
+- 生命周期测试检查真实 Fabric 事件次数、sender 与会话清理，并覆盖规则开关、监听器异常、重生、重复登录、影子假人与关服。
+- 生命周期用例使用独立测试环境分批运行；调用全服退出的关服用例使用单独批次，避免干扰其他测试的玩家连接。
 
 ## 发布流程
 

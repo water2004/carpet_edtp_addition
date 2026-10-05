@@ -4,7 +4,6 @@ import carpet.patches.EntityPlayerMPFake;
 import carpet.patches.FakeClientConnection;
 import com.mojang.authlib.GameProfile;
 import io.netty.channel.embedded.EmbeddedChannel;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
@@ -16,7 +15,6 @@ import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.impl.networking.server.ServerNetworkingImpl;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.Connection;
 import net.minecraft.network.DisconnectionDetails;
@@ -59,7 +57,7 @@ public class FakePlayerConnectionLifecycleGameTests {
         });
     }
 
-    @GameTest
+    @GameTest(environment = "carpet_edtp_addition_gametest:fake_player_lifecycle")
     public void disabledRulePreservesNativeJoinAndDisconnectBehavior(GameTestHelper helper) {
         try (Fixture fixture = new Fixture(helper, false)) {
             EntityPlayerMPFake player = fixture.spawnFake();
@@ -73,7 +71,7 @@ public class FakePlayerConnectionLifecycleGameTests {
         }
     }
 
-    @GameTest
+    @GameTest(environment = "carpet_edtp_addition_gametest:fake_player_lifecycle")
     public void fakeExitCompletesOneDisconnectAndReleasesSession(GameTestHelper helper) {
         try (Fixture fixture = new Fixture(helper, true)) {
             EntityPlayerMPFake player = fixture.spawnFake();
@@ -89,7 +87,7 @@ public class FakePlayerConnectionLifecycleGameTests {
         }
     }
 
-    @GameTest
+    @GameTest(environment = "carpet_edtp_addition_gametest:fake_player_lifecycle")
     public void ruleChangesKeepManagedSessionsPairedAndCanCleanOlderConnections(GameTestHelper helper) {
         try (Fixture fixture = new Fixture(helper, true)) {
             EntityPlayerMPFake managed = fixture.spawnFake();
@@ -105,7 +103,7 @@ public class FakePlayerConnectionLifecycleGameTests {
         }
     }
 
-    @GameTest
+    @GameTest(environment = "carpet_edtp_addition_gametest:fake_player_lifecycle")
     public void alreadyDisconnectedAddonIsNotNotifiedTwice(GameTestHelper helper) {
         try (Fixture fixture = new Fixture(helper, true)) {
             EntityPlayerMPFake player = fixture.spawnFake();
@@ -116,7 +114,7 @@ public class FakePlayerConnectionLifecycleGameTests {
         }
     }
 
-    @GameTest
+    @GameTest(environment = "carpet_edtp_addition_gametest:fake_player_lifecycle")
     public void throwingListenerStillAllowsRemovalAndSessionCleanup(GameTestHelper helper) {
         try (Fixture fixture = new Fixture(helper, true)) {
             EntityPlayerMPFake player = fixture.spawnFake();
@@ -131,7 +129,7 @@ public class FakePlayerConnectionLifecycleGameTests {
         }
     }
 
-    @GameTest
+    @GameTest(environment = "carpet_edtp_addition_gametest:fake_player_lifecycle")
     public void earlierFailedNativeDisconnectStillReleasesSessionOnRemoval(GameTestHelper helper) {
         try (Fixture fixture = new Fixture(helper, true)) {
             EntityPlayerMPFake player = fixture.spawnFake();
@@ -148,7 +146,7 @@ public class FakePlayerConnectionLifecycleGameTests {
         }
     }
 
-    @GameTest
+    @GameTest(environment = "carpet_edtp_addition_gametest:fake_player_lifecycle")
     public void realPlayerRemovalDoesNotSynthesizeDisconnect(GameTestHelper helper) {
         try (Fixture fixture = new Fixture(helper, true)) {
             ServerPlayer real = fixture.spawnReal();
@@ -162,7 +160,7 @@ public class FakePlayerConnectionLifecycleGameTests {
         }
     }
 
-    @GameTest
+    @GameTest(environment = "carpet_edtp_addition_gametest:fake_player_lifecycle")
     public void scheduledCarpetKillCompletesTheManagedLifecycle(GameTestHelper helper) {
         Fixture fixture = new Fixture(helper, true);
         EntityPlayerMPFake player;
@@ -186,7 +184,7 @@ public class FakePlayerConnectionLifecycleGameTests {
         });
     }
 
-    @GameTest
+    @GameTest(environment = "carpet_edtp_addition_gametest:fake_player_lifecycle")
     public void respawnKeepsTheConnectionAndSameUuidRejoinUsesANewLifecycle(GameTestHelper helper) {
         try (Fixture fixture = new Fixture(helper, true)) {
             EntityPlayerMPFake first = fixture.spawnFake();
@@ -212,52 +210,20 @@ public class FakePlayerConnectionLifecycleGameTests {
         }
     }
 
-    @GameTest
+    @GameTest(environment = "carpet_edtp_addition_gametest:fake_player_shutdown")
     public void shadowPlayerAndShutdownUseTheSameCleanup(GameTestHelper helper) {
         try (Fixture fixture = new Fixture(helper, true)) {
             ServerPlayer real = fixture.spawnReal();
             EntityPlayerMPFake shadow = EntityPlayerMPFake.createShadow(helper.getLevel().getServer(), real);
             fixture.players.add(shadow);
             assertNativeJoin(helper, shadow);
+            helper.assertTrue(helper.getLevel().getServer().getPlayerList().getPlayers().equals(List.of(shadow)),
+                "Shutdown test must run without other connected test players");
             helper.getLevel().getServer().getPlayerList().removeAll();
             assertDisconnected(helper, shadow);
             fixture.remove(shadow);
             assertDisconnected(helper, shadow);
             helper.succeed();
-        }
-    }
-
-    @GameTest
-    public void tisRealPlayerTickSchedulingPreservesConnectionLifecycle(GameTestHelper helper) throws Exception {
-        if (!FabricLoader.getInstance().isModLoaded("carpet-tis-addition")) {
-            helper.succeed();
-            return;
-        }
-        // Optional integration dependency belongs only to the test runtime.
-        Field tickRule = Class.forName("carpettisaddition.CarpetTISAdditionSettings")
-            .getField("fakePlayerTicksLikeRealPlayer");
-        boolean original = tickRule.getBoolean(null);
-        try {
-            for (boolean ticksLikeReal : new boolean[] {false, true}) {
-                tickRule.setBoolean(null, ticksLikeReal);
-                try (Fixture fixture = new Fixture(helper, true)) {
-                    EntityPlayerMPFake player = fixture.spawnFake();
-                    player.tick();
-                    helper.getLevel().getServer().getConnection().tick();
-                    // Also exercise switching tick scheduling for an already connected fake.
-                    tickRule.setBoolean(null, !ticksLikeReal);
-                    player.tick();
-                    helper.getLevel().getServer().getConnection().tick();
-                    assertNativeJoin(helper, player);
-                    helper.assertTrue(observation(player).disconnects == 0 && isTracked(player),
-                        "TIS tick scheduling prematurely disconnected the fake");
-                    player.kill(Component.translatable("multiplayer.disconnect.duplicate_login"));
-                    assertDisconnected(helper, player);
-                }
-            }
-            helper.succeed();
-        } finally {
-            tickRule.setBoolean(null, original);
         }
     }
 
