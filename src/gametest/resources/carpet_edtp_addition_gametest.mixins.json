@@ -4,6 +4,7 @@
   "package": "org.edtp.carpet_edtp_addition.gametest.mixin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
+    "FabricReceiverRegistryAccessor",
     "SculkSensorBlockGameTestMixin",
     "ServerCommonPacketListenerGameTestMixin"
   ],
