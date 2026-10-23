@@ -63,8 +63,9 @@ public class PreserveLightOnUpgradeGameTests {
             CompoundTag output = DataFixTypes.CHUNK.updateToCurrentVersion(DataFixers.getDataFixer(), input.copy(), 4536);
             assertLightPreserved(helper, input, output);
             String renamedBlock = sections(output).getCompoundOrEmpty(0)
-                .getCompoundOrEmpty("block_states").getListOrEmpty("palette").getCompoundOrEmpty(0).getStringOr("Name", "");
-            helper.assertTrue(renamedBlock.equals("minecraft:iron_chain"), "Unrelated block migration was skipped");
+                .getCompoundOrEmpty("block_states").getListOrEmpty("palette").getCompoundOrEmpty(0).getStringOr("id", "");
+            helper.assertTrue(renamedBlock.equals("minecraft:iron_chain"),
+                "Unrelated block migration was skipped: " + renamedBlock);
             SerializableChunkData parsed = SerializableChunkData.parse(
                 helper.getLevel(), helper.getLevel().palettedContainerFactory(), output
             );

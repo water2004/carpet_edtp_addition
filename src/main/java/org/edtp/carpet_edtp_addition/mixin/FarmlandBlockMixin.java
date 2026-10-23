@@ -25,10 +25,10 @@ public abstract class FarmlandBlockMixin {
         method = "fallOn",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/level/block/FarmlandBlock;turnToDirt(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"
+            target = "Lnet/minecraft/world/level/block/FarmlandBlock;turnToBaseBlock(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"
         )
     )
-    private boolean allowFarmlandTrampling(Entity sourceEntity, BlockState state, Level level, BlockPos pos) {
+    private boolean allowFarmlandTrampling(FarmlandBlock farmland, Entity sourceEntity, BlockState state, Level level, BlockPos pos) {
         if (sourceEntity instanceof Player player) {
             return !CarpetEdtpAdditionSettings.featherFallingPreventsFarmlandTrampling.value()
                 || !hasFeatherFalling(player, level);

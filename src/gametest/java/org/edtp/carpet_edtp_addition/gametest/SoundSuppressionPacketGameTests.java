@@ -2,6 +2,7 @@ package org.edtp.carpet_edtp_addition.gametest;
 
 import com.mojang.authlib.GameProfile;
 import io.netty.channel.embedded.EmbeddedChannel;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -251,11 +252,21 @@ public class SoundSuppressionPacketGameTests {
             this.player.setGameMode(GameType.SURVIVAL);
             this.player.setNoGravity(true);
             this.player.connection.teleport(placementPos.getX() + 0.5, placementPos.getY(), placementPos.getZ() + 2.5, 180, 0);
+            // 26.3 validates acknowledgement coordinates as movement. Refresh the tick baseline after fixture setup.
+            this.player.connection.resetPosition();
+            List<ClientboundPlayerPositionPacket> teleports = new ArrayList<>();
             Object message;
             while ((message = this.channel.readOutbound()) != null) {
                 if (message instanceof ClientboundPlayerPositionPacket teleport) {
-                    this.send(new ServerboundAcceptTeleportationPacket(teleport.id()));
+                    teleports.add(teleport);
                 }
+            }
+            for (ClientboundPlayerPositionPacket teleport : teleports) {
+                var change = teleport.change();
+                var position = change.position();
+                this.send(new ServerboundAcceptTeleportationPacket(
+                    teleport.id(), position.x, position.y, position.z, change.yRot(), change.xRot()
+                ));
             }
             this.send(new ServerboundPlayerLoadedPacket());
             SoundSuppressionTestHooks.capturePacketErrors(this.player.getUUID());
