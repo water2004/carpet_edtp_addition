@@ -1,6 +1,7 @@
 package org.edtp.carpet_edtp_addition;
 
 import carpet.api.settings.CarpetRule;
+import carpet.api.settings.InvalidRuleValueException;
 import carpet.api.settings.SettingsManager;
 import carpet.CarpetServer;
 import org.slf4j.Logger;
@@ -155,6 +156,19 @@ public class CarpetEdtpAdditionSettings {
         "Completes Fabric disconnect events and network session cleanup for Carpet fake players"
     );
 
+    public static final EdtpCarpetIntegerRule iceRailSpeed = new EdtpCarpetIntegerRule(
+        "iceRailSpeed",
+        0,
+        "Minecart speed limits on packed/blue ice: 0 vanilla, 1 both 1 block/tick, 2 1/2, 3 4/3 and 8/3",
+        List.of(0, 1, 2, 3)
+    );
+
+    public static final EdtpCarpetRule minecartNoPassengerSpeedPenalty = new EdtpCarpetRule(
+        "minecartNoPassengerSpeedPenalty",
+        false,
+        "Uses the unoccupied minecart movement multiplier for minecarts with passengers"
+    );
+
     public static void register() {
         try {
             for (Field field : CarpetEdtpAdditionSettings.class.getDeclaredFields()) {
@@ -297,11 +311,17 @@ public class CarpetEdtpAdditionSettings {
         private final String name;
         private Integer value;
         private final Integer defaultValue;
+        private final List<Integer> allowedValues;
 
         public EdtpCarpetIntegerRule(String name, Integer defaultValue, String description) {
+            this(name, defaultValue, description, List.of());
+        }
+
+        public EdtpCarpetIntegerRule(String name, Integer defaultValue, String description, List<Integer> allowedValues) {
             this.name = name;
             this.defaultValue = defaultValue;
             this.value = defaultValue;
+            this.allowedValues = List.copyOf(allowedValues);
         }
 
         @Override
@@ -321,6 +341,9 @@ public class CarpetEdtpAdditionSettings {
 
         @Override
         public Collection<String> suggestions() {
+            if (!allowedValues.isEmpty()) {
+                return allowedValues.stream().map(String::valueOf).toList();
+            }
             return List.of("0", "1", "2", "3", "4");
         }
 
@@ -352,24 +375,29 @@ public class CarpetEdtpAdditionSettings {
 
         @Override
         public boolean strict() {
-            return false;
+            return !allowedValues.isEmpty();
         }
 
         @Override
-        public void set(CommandSourceStack source, String value) {
+        public void set(CommandSourceStack source, String value) throws InvalidRuleValueException {
             try {
-                this.value = Integer.parseInt(value);
-                if (source != null) {
-                    settingsManager().notifyRuleChanged(source, this, value);
+                set(source, Integer.parseInt(value));
+            } catch (NumberFormatException ignored) {
+                if (!allowedValues.isEmpty()) {
+                    throw new InvalidRuleValueException("Expected one of: " + suggestions());
                 }
-            } catch (NumberFormatException ignored) {}
+            }
         }
         
-        public void set(CommandSourceStack source, Integer value) {
-             this.value = value;
-             if (source != null) {
-                 settingsManager().notifyRuleChanged(source, this, value.toString());
-             }
+        @Override
+        public void set(CommandSourceStack source, Integer value) throws InvalidRuleValueException {
+            if (!allowedValues.isEmpty() && !allowedValues.contains(value)) {
+                throw new InvalidRuleValueException("Expected one of: " + suggestions());
+            }
+            this.value = value;
+            if (source != null) {
+                settingsManager().notifyRuleChanged(source, this, value.toString());
+            }
         }
 
         @Override

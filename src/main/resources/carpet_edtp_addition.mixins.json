@@ -22,6 +22,8 @@
     "FakePlayerConnectionLifecycleMixin",
     "LivingEntityMixin",
     "LevelChunkMixin",
+    "OldMinecartIceSpeedMixin",
+    "OldMinecartPassengerSpeedMixin",
     "PlayerListFakePlayerLifecycleMixin",
     "ShulkerBoxBlockEntityMixin",
     "ShulkerBoxSlotMixin",

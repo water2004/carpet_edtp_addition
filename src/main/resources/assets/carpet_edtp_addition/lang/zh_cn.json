@@ -48,6 +48,10 @@
   "carpet.rule.preserveLightOnUpgrade.desc": "版本升级时保留已标记有效的光照缓存，不影响正常光照更新、世界高度迁移和主动清除缓存",
   "carpet.rule.fakePlayerConnectionLifecycle.name": "假人连接生命周期",
   "carpet.rule.fakePlayerConnectionLifecycle.desc": "补全 Carpet 假人的 Fabric 下线事件与网络会话清理，保留已有 INIT/JOIN 事件和玩家 tick 调度",
+  "carpet.rule.iceRailSpeed.name": "冰基轨道限速",
+  "carpet.rule.iceRailSpeed.desc": "调整默认矿车运动在浮冰/蓝冰上轨道的限速，单位方块/tick：0 原版；1 均为 1；2 为 1/2；3 为 4/3 和 8/3，并提高内部速度上限以补偿原版乘客倍率。与 minecartNoPassengerSpeedPenalty 独立",
+  "carpet.rule.minecartNoPassengerSpeedPenalty.name": "取消矿车乘客速度惩罚",
+  "carpet.rule.minecartNoPassengerSpeedPenalty.desc": "将默认矿车运动在轨道上有乘客时的位移倍率从 0.75 改为 1，与 iceRailSpeed 独立；不改变自然阻力、加速或制动",
   "item.bundle.insert.success": "已放入 %s × %s",
   "item.bundle.insert.fail": "无法放入 %s (收纳袋已满)"
 }

@@ -48,6 +48,10 @@
   "carpet.rule.preserveLightOnUpgrade.desc": "Preserves light caches marked valid during version upgrades; normal lighting, height migration and explicit cache erasure are unchanged",
   "carpet.rule.fakePlayerConnectionLifecycle.name": "Fake Player Connection Lifecycle",
   "carpet.rule.fakePlayerConnectionLifecycle.desc": "Completes Fabric disconnect events and network session cleanup for Carpet fake players; existing INIT/JOIN events and player tick scheduling are preserved",
+  "carpet.rule.iceRailSpeed.name": "Ice Rail Speed",
+  "carpet.rule.iceRailSpeed.desc": "Default minecart movement on rails over packed/blue ice, in blocks/tick: 0 vanilla; 1 both 1; 2 1/2; 3 4/3 and 8/3, with a matching internal cap to compensate for the vanilla passenger multiplier. Independent of minecartNoPassengerSpeedPenalty",
+  "carpet.rule.minecartNoPassengerSpeedPenalty.name": "No Minecart Passenger Speed Penalty",
+  "carpet.rule.minecartNoPassengerSpeedPenalty.desc": "Changes the default on-rail passenger movement multiplier from 0.75 to 1, independently of iceRailSpeed; natural drag, acceleration and braking are unchanged",
   "item.bundle.insert.success": "Inserted %s × %s",
   "item.bundle.insert.fail": "Cannot insert %s (bundle is full)"
 }
