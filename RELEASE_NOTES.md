@@ -1,6 +1,13 @@
-# 1.11 (Minecraft 26.2)
+# 1.11 (Minecraft 26.3)
 
 ## 更新内容
+
+### 版本适配：
+
+- 将 1.11 迁移至 Minecraft 26.3，保留已有规则、默认值和矿车规则的独立组合方式；Mod 版本号仍为 `1.11`。
+- `main` 跟进 Minecraft 26.3；Minecraft 26.2 的代码保留在 [`26.2` 分支](https://github.com/water2004/carpet_edtp_addition/tree/26.2)，旧版 Release `v1.11-26.2` 保持可下载。
+- 使用 Fabric API `0.165.0+26.3`、Carpet `26.3+v261008`，最低 Fabric Loader 为 `0.19.5`（构建使用 `0.20.1`）。
+- 适配 26.3 的耕地还原调用，保持“生物不会踩坏耕地”和“摔落保护防踩坏耕地”两条规则的效果。
 
 ### 新内容：
 
@@ -36,13 +43,21 @@
 
 ### 其他改进：
 
-- 新增 19 项 Fabric GameTest：10 项假人生命周期用例覆盖连接事件、会话清理、规则切换、监听器异常、重生、重复登录、影子假人与关服；9 项矿车用例覆盖规则组合、实际 tick 位移、原版阻力、动力轨加速制动、路基变化、脱轨和参数校验。
-- 生命周期、关服及矿车用例使用独立测试批次，减少全局规则和玩家连接之间的干扰；当前共 57 项测试通过。
+- 在 Minecraft 26.3 重新验证假人连接生命周期、矿车规则、光照升级、声音抑制及已有规则的回归用例。
+- 新增 2 项耕地踩踏 GameTest，覆盖规则开关、生物与玩家区别、摔落保护附魔鞋及普通鞋；使用独立批次并恢复全局规则。
+- 适配 26.3 传送确认包中的坐标、朝向与移动校验，以及区块升级后的方块状态 `id` 字段，保留原测试断言的验证目标；当前共 59 项测试通过。
 - 为新整数规则添加严格选项校验，保留既有整数规则的取值行为。
 
 ---
 
 ## Update Details
+
+### Compatibility Update:
+
+- Ported 1.11 to Minecraft 26.3, preserving existing rules, defaults, and independent minecart rule combinations. The mod version remains `1.11`.
+- `main` now targets Minecraft 26.3. Minecraft 26.2 sources are preserved on the [`26.2` branch](https://github.com/water2004/carpet_edtp_addition/tree/26.2), and the existing `v1.11-26.2` release remains available.
+- Uses Fabric API `0.165.0+26.3` and Carpet `26.3+v261008`. Requires Fabric Loader `0.19.5` or newer; builds use `0.20.1`.
+- Adapted the farmland conversion hook for 26.3, preserving both mob trampling prevention and Feather Falling protection.
 
 ### What's New:
 
@@ -78,6 +93,7 @@ All speeds are in **blocks per tick**, without conversion or compensation for TP
 
 ### Other Improvements:
 
-- Added 19 Fabric GameTests: 10 fake-player lifecycle tests cover connection events, session cleanup, rule changes, listener failures, respawn, duplicate login, shadow players, and shutdown; nine minecart tests cover rule combinations, actual tick displacement, vanilla drag, powered-rail acceleration and braking, support changes, derailment, and value validation.
-- Lifecycle, shutdown, and minecart tests use separate batches to reduce interference involving global rules and player connections. All 57 current tests pass.
+- Revalidated fake-player connection lifecycle, minecart rules, light upgrades, sound suppression, and existing rule regression tests on Minecraft 26.3.
+- Added two isolated farmland trampling GameTests covering rule toggles, mobs versus players, Feather Falling boots, and ordinary boots, with global rule restoration.
+- Updated the packet fixture for 26.3 teleport acknowledgement coordinates, rotation, and movement validation, and updated chunk upgrade checks for the block-state `id` field while retaining their original verification goals. All 59 current tests pass.
 - Added strict option validation for the new integer rule while preserving existing integer-rule value behavior.
