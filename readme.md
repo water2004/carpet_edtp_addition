@@ -4,7 +4,7 @@
 
 ## 支持版本
 
-- Mod：`1.10`
+- Mod：`1.11`
 - Minecraft：`26.2`
 - Fabric Loader：`0.18.0` 或更高版本（构建使用 `0.19.3`）
 - Carpet：`26.2+v260616` 或更高版本
@@ -45,9 +45,9 @@
 | `soundSuppressionReintroduced` | `false` | 重新引入 Minecraft 1.21 的声音抑制器相关行为 | `true` / `false` | `1.9+` |
 | `staggeredBeacons` | `false` | 信标按坐标错峰检查底座、刷新效果，减少集中在同一 tick 的工作量 | `true` / `false` | `1.9+` |
 | `preserveLightOnUpgrade` | `false` | 版本升级时保留已标记有效的光照缓存，不影响正常光照更新和主动清除缓存 | `true` / `false` | `1.10+` |
-| `fakePlayerConnectionLifecycle` | `false` | 补全假人下线与关服时的 Fabric 连接事件和网络会话清理 | `true` / `false` | 待发布 |
-| `iceRailSpeed` | `0` | 分档调整浮冰、蓝冰支撑的轨道限速，最高档补偿原版乘客倍率 | `0` / `1` / `2` / `3` | 待发布 |
-| `minecartNoPassengerSpeedPenalty` | `false` | 将有乘客矿车的轨道位移倍率从 `0.75` 改为 `1` | `true` / `false` | 待发布 |
+| `fakePlayerConnectionLifecycle` | `false` | 补全假人下线与关服时的 Fabric 连接事件和网络会话清理 | `true` / `false` | `1.11+` |
+| `iceRailSpeed` | `0` | 分档调整浮冰、蓝冰支撑的轨道限速，最高档补偿原版乘客倍率 | `0` / `1` / `2` / `3` | `1.11+` |
+| `minecartNoPassengerSpeedPenalty` | `false` | 将有乘客矿车的轨道位移倍率从 `0.75` 改为 `1` | `true` / `false` | `1.11+` |
 
 ## 说明
 
